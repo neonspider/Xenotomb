@@ -1,0 +1,7 @@
+ACTOR Xenopistol : Pistol replaces Pistol
+{
+	Weapon.BobRangeX 0.0
+	Weapon.BobRangeY 0.5
+	Weapon.BobSpeed 1.5
+	Weapon.BobStyle Normal
+}

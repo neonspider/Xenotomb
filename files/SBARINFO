@@ -1,0 +1,61 @@
+CompleteBorder true;
+height 32;
+Resolution 640,480;
+
+/*statusbar fullscreen // Standard Doom Status bar
+{
+	alpha 0.5
+	drawimage "STBARMIN", 0, 168;
+	drawnumber 3, CONFONT, WHITE, ammo1, 220, 190;
+	drawnumber 3, CONFONT, WHITE, health, 0, 190;
+	drawnumber 3, CONFONT, WHITE, armor, 0, 171;
+	drawstring CONFONT, LIGHTBLUE, "SHLD", 75, 160;
+	drawstring CONFONT, DARKGREEN, "LIFE", 0, 180;
+}
+*/
+
+statusbar fullscreen, forcescaled
+{
+	//Life Display
+	drawimage "STLIFEBG", -106, 447; //Background
+	drawimage "STLIFED1", -106, 447;
+	drawnumber 3, FONT1, RED, health, 16, 467;
+	IfHealth 26 %
+	{
+	drawimage "STLIFEC1", -106, 447;
+	drawnumber 3, FONT1, ORANGE, health, 16, 467;
+	}
+	IfHealth 51 %
+	{
+	drawimage "STLIFEB1", -106, 447;
+	drawnumber 3, FONT1, YELLOW, health, 16, 467;
+	}
+	IfHealth 76 %
+	{
+	drawimage "STLIFEA1", -106, 447;
+	drawnumber 3, FONT1, GREEN, health, 16, 467;
+	}
+	IfHealth 101 %
+	{
+	drawnumber 3, FONT1, CYAN, health, 16, 467;
+	}
+	//Shield Display
+	drawimage "STARMRBG", -106, 414; //Background
+	drawbar "STARMRFA", "STARMRFT", armor(100), horizontal, interpolate(4), -100, 431;
+	drawbar "STARM2FA", "STARM2FT", armor(200), horizontal, interpolate(4), -179, 419;
+	drawnumber 3, FONT1, GREEN, armor, 16, 419;
+}
+
+
+statusbar normal // Standard Doom Status bar
+{
+	alpha 1.0
+	drawimage "STBARBIG", 0, 0;
+}
+/*
+statusbar normal, fullscreenoffsets
+{
+  drawbar "BARF1", "BARB1", health (100), horizontal, 101, -76; // Bar
+  drawbar "BARF2", "BARB2", health (200), horizontal, 1, -76; // Bar (over 100)
+}
+*/

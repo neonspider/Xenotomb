@@ -1,0 +1,43 @@
+texture CUT1A1
+pic CUT1A1 tics 2
+pic CUT1A2 tics 6
+
+texture CUT1B12
+pic CUT1B12 tics 4
+pic CUT1B13 tics 4
+
+texture STLIFEA1 //	Animated Life Status (76% or more)
+pic STLIFEA1 tics 2
+pic STLIFEA2 tics 2
+pic STLIFEA3 tics 2
+pic STLIFEA4 tics 2
+pic STLIFEA5 tics 2
+pic STLIFEA6 tics 2
+pic STLIFEA7 tics 18
+
+texture STLIFEB1 //	Animated Life Status (51%-75%)
+pic STLIFEB1 tics 2
+pic STLIFEB2 tics 2
+pic STLIFEB3 tics 2
+pic STLIFEB4 tics 2
+pic STLIFEB5 tics 2
+pic STLIFEB6 tics 2
+pic STLIFEB7 tics 14
+
+texture STLIFEC1 //	Animated Life Status (26%-50%)
+pic STLIFEC1 tics 2
+pic STLIFEC2 tics 2
+pic STLIFEC3 tics 2
+pic STLIFEC4 tics 2
+pic STLIFEC5 tics 1
+pic STLIFEC6 tics 1
+pic STLIFEC7 tics 10
+
+texture STLIFED1 //	Animated Life Status (25% or less)
+pic STLIFED1 tics 1
+pic STLIFED2 tics 1
+pic STLIFED3 tics 1
+pic STLIFED4 tics 1
+pic STLIFED5 tics 1
+pic STLIFED6 tics 1
+pic STLIFED7 tics 8

@@ -1,0 +1,52 @@
+DEFAULTLISTMENU
+{
+Selector "-", -32, -5
+Linespacing 16
+Font "Smallfont", "Untranslated"
+}
+
+LISTMENU "MainMenu"
+{
+		//StaticPatch 94, 0, "M_DOOM"
+		Position 97, 72
+		StaticPatch 40, 10, "M_SKL01"
+		StaticPatch 232, 10, "M_SKL00"
+		
+		TextItem "New Game", "n", "PlayerclassMenu"
+		TextItem "Load Data", "l", "LoadGameMenu"
+		//PatchItem "M_SAVEG", "s", "SaveGameMenu"
+		TextItem "Setup","o", "OptionsMenu"
+		TextItem "Register!","r", "ReadThisMenu"
+		TextItem "Quit Game", "q", "QuitMenu"
+		
+		Font "Smallfont", "Lightblue"
+		StaticTextCentered 0, 220, "Pre-Alpha, 29/10/2016"
+		Font "Smallfont", "Yellow"
+		StaticText 100, 220, "Shareware Version!"
+		StaticPatch 320, 215, "LOGO"
+}
+
+OptionMenu "OptionsMenu"
+{
+	Title "$OPTMNU_TITLE"
+	Submenu "$OPTMNU_CONTROLS",			"CustomizeControls"
+	Submenu "$OPTMNU_MOUSE",				"MouseOptions"
+	Submenu "$OPTMNU_JOYSTICK",			"JoystickOptions"
+	StaticText " "
+	Submenu "$OPTMNU_PLAYER",			"PlayerMenu"
+	//Submenu "$OPTMNU_GAMEPLAY",			"GameplayOptions"
+	//Submenu "$OPTMNU_COMPATIBILITY",	"CompatibilityOptions"
+	Submenu "$OPTMNU_AUTOMAP",			"AutomapOptions"
+	Submenu "$OPTMNU_HUD",				"HUDOptions"
+	//Submenu "$OPTMNU_MISCELLANEOUS",	"MiscOptions"
+	//Submenu "$OPTMNU_NETWORK",		"NetworkOptions"
+	Submenu "$OPTMNU_SOUND",		"SoundOptions"
+	Submenu "$OPTMNU_DISPLAY",	"VideoOptions"
+	Submenu "$OPTMNU_VIDEO",		"VideoModeMenu"
+	StaticText " "
+	SafeCommand "$OPTMNU_DEFAULTS",	"reset2defaults"
+	SafeCommand	"$OPTMNU_RESETTOSAVED",	"reset2saved"
+	StaticText " "
+	StaticText "This version of Xenotomb is SHAREWARE!"
+	//Command "$OPTMNU_CONSOLE",			"menuconsole"
+}

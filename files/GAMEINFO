@@ -1,0 +1,4 @@
+STARTUPTYPE = Hexen //	Doesn't work if STARTUP is in a folder
+STARTUPSONG = X_LOADIN
+STARTUPCOLORS = "33FF6E", "3E5C67"
+STARTUPTITLE = "Xenotomb"

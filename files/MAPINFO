@@ -1,0 +1,55 @@
+gameinfo
+{
+	//	Original menu, now redundant due to TITLEMAP
+	creditpage = "XENOTOMB"
+	infopage = "XENOHELP"
+	addinfopage = "XENOCRED"
+	//addinfopage = "XENOWARE"
+	titlemusic = "X_TITLEM"
+	titlepage = "XENOTOMB"
+	advisorytime = 3
+	pagetime = 7
+	//	Still need to make a full wallpaper for this
+	borderflat = "XENOTILE"
+	//	TR-DOS, yo!
+	menufontcolor_action = "green"
+	menufontcolor_title = "DARKGRAY"
+    menufontcolor_label = "DARKGRAY"
+    menufontcolor_value = "DARKGRAY"
+    menufontcolor_action = "DARKGRAY"
+    menufontcolor_header = "DARKRED"
+    menufontcolor_highlight = "DARKGRAY"
+    menufontcolor_selection = "DARKRED"
+	quitmessages = "What are you saying?\nYou found something better?",
+					"They can't love you the same way I do!",
+					"Game over, man?", "Game under, man?", "Too intense?",
+					"Your mama liked it.", "...", "But we DON'T have DLC!",
+					"Good idea.\nLeave before the lawsuits get involved.",
+					"If you leave now,\nyou forfeit your procreation rights.",
+					"Wimp.", "Too oldschool for your blood?", "Break a leg.",
+					"Fine,\nbut don't expect a rebate.", "Is it the aliens?",
+					"I see what you do\n when you think nobody's watching...",
+					"Hey!\n\nYou didn't pay for this\nso you can't complain!",
+					"Buy our T-shirts!", "Xenotomb lunchboxes, now in stores!"
+}
+
+clearepisodes
+
+episode MAP01
+{
+   name = "Xenotomb"
+   key = "k"
+}
+
+
+map TITLEMAP "TITLEMAP"
+{
+	music = "X_TITLEM"
+}
+
+
+map MAP01 "Arrival"
+{
+	sky1 = "SKY1"
+	music = "X_MAP01"
+}
