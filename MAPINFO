@@ -35,10 +35,14 @@ gameinfo
 
 clearepisodes
 
-episode MAP01
+episode A10
 {
-   name = "Xenotomb"
-   key = "k"
+   name = "Actual Start"
+}
+
+episode B10
+{
+   name = "Outside Section"
 }
 
 
@@ -48,8 +52,14 @@ map TITLEMAP "TITLEMAP"
 }
 
 
-map MAP01 "Arrival"
+map A10 "Arrival"
 {
 	sky1 = "SKY1"
 	music = "X_MAP01"
+}
+
+map B10 "Fresh Air"
+{
+	sky1 = "BLACK"
+	music = "X_AIRLOC"
 }

@@ -2,7 +2,7 @@ DEFAULTLISTMENU
 {
 Selector "-", -32, -5
 Linespacing 16
-Font "Smallfont", "Untranslated"
+Font "FONT1", "Untranslated"
 }
 
 LISTMENU "MainMenu"
@@ -19,11 +19,21 @@ LISTMENU "MainMenu"
 		TextItem "Register!","r", "ReadThisMenu"
 		TextItem "Quit Game", "q", "QuitMenu"
 		
-		Font "Smallfont", "Lightblue"
-		StaticTextCentered 0, 220, "Pre-Alpha, 29/10/2016"
-		Font "Smallfont", "Yellow"
-		StaticText 100, 220, "Shareware Version!"
+		Font "FONT1", "Lightblue"
+		StaticText 0, 220, "Pre-Alpha, share if you dare..."
+		Font "FONT1", "Yellow"
+		//StaticText 100, 220, "Shareware Version!"
 		StaticPatch 320, 215, "LOGO"
+}
+
+ListMenu "EpisodeMenu"
+{
+		NetgameMessage "$NEWGAME"
+		Position 48, 63
+		Font "FONT1", "Untranslated"
+		StaticTextCentered 100, 0, "Map Selection"
+		Font "Confont", "Untranslated"
+		StaticTextCentered 100, 20, "(DEBUGGER FEATURES, YO!)"
 }
 
 OptionMenu "OptionsMenu"
