@@ -16,4 +16,5 @@
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
 
+# Don't remove this or the ENDOOM causes some weird merge issues.
 *.END binary
