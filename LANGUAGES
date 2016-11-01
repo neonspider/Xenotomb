@@ -1,8 +1,4 @@
-// This is an example LANGUAGE LUMP
-
-[enu default] 
-/* This section is both for American English (enu -> en US) and the default language
-   (used if there are no available translations for the user's own language).        */
+[enu default]
 
 OPTMNU_TITLE				= "Xenotomb Setup Program 1.0";
 OPTMNU_CONTROLS				= "Key Configuration";
