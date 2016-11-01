@@ -1,0 +1,169 @@
+type = "Doom Builder Map Settings Configuration";
+gameconfig = "GZDoom_DoomUDMF.cfg";
+strictpatches = 0;
+
+maps
+{
+	
+	MAP01
+	{
+		
+		resources
+		{
+			
+			resource0
+			{
+				type = 1;
+				location = "N:\\Games\\DOOM\\Xenotomb";
+				option1 = 0;
+				option2 = 0;
+				notfortesting = 0;
+			}
+		}
+		defaultfloortexture = "FLOOR0_1";
+		defaultceiltexture = "CEIL1_1";
+		defaulttoptexture = "STARTAN2";
+		defaultwalltexture = "STARTAN2";
+		defaultbottomtexture = "STARTAN2";
+		custombrightness = 196;
+		customfloorheight = 0;
+		customceilheight = 128;
+		overridefloortexture = false;
+		overrideceiltexture = false;
+		overridetoptexture = false;
+		overridemiddletexture = false;
+		overridebottomtexture = false;
+		overridefloorheight = false;
+		overrideceilheight = false;
+		overridebrightness = false;
+		uselongtexturenames = false;
+		viewpositionx = 142.3448f;
+		viewpositiony = -284.6647f;
+		viewscale = 1.363123f;
+		scriptcompiler = "zdoom_acs.cfg";
+		
+		grid
+		{
+			background = "";
+			backsource = 0;
+			backoffsetx = 0;
+			backoffsety = 0;
+			backscalex = 100;
+			backscaley = 100;
+			gridsize = 16;
+		}
+		
+		fieldtypes
+		{
+			
+			linedef
+			{
+				arg0str = 2;
+			}
+			
+			sidedef
+			{
+				offsetx_mid = 1;
+				offsety_mid = 1;
+				offsetx_top = 1;
+				offsety_top = 1;
+				offsetx_bottom = 1;
+				offsety_bottom = 1;
+				light = 0;
+			}
+			
+			sector
+			{
+				rotationceiling = 1;
+				rotationfloor = 1;
+			}
+		}
+	}
+	
+	B10
+	{
+		
+		resources
+		{
+			
+			resource0
+			{
+				type = 1;
+				location = "N:\\Games\\DOOM\\Xenotomb";
+				option1 = 0;
+				option2 = 0;
+				notfortesting = 0;
+			}
+		}
+		defaultfloortexture = "FLOOR0_1";
+		defaultceiltexture = "CEIL1_1";
+		defaulttoptexture = "STARTAN2";
+		defaultwalltexture = "STARTAN2";
+		defaultbottomtexture = "STARTAN2";
+		custombrightness = 196;
+		customfloorheight = 0;
+		customceilheight = 128;
+		overridefloortexture = false;
+		overrideceiltexture = false;
+		overridetoptexture = false;
+		overridemiddletexture = false;
+		overridebottomtexture = false;
+		overridefloorheight = false;
+		overrideceilheight = false;
+		overridebrightness = false;
+		uselongtexturenames = false;
+		viewpositionx = -70.46294f;
+		viewpositiony = 85.65199f;
+		viewscale = 0.6204469f;
+		scriptcompiler = "zdoom_acs.cfg";
+		
+		grid
+		{
+			background = "";
+			backsource = 0;
+			backoffsetx = 0;
+			backoffsety = 0;
+			backscalex = 100;
+			backscaley = 100;
+			gridsize = 64;
+		}
+		
+		fieldtypes
+		{
+			
+			linedef
+			{
+				arg0str = 2;
+			}
+			
+			sidedef
+			{
+				offsetx_mid = 1;
+				offsety_mid = 1;
+				offsetx_top = 1;
+				offsety_top = 1;
+				offsetx_bottom = 1;
+				offsety_bottom = 1;
+				light = 0;
+			}
+			
+			sector
+			{
+				rotationceiling = 1;
+				rotationfloor = 1;
+			}
+		}
+		
+		scriptlumps
+		{
+			
+			lump
+			{
+				filename = "SCRIPTS";
+				hash = 3469170009;
+				caretposition = 285;
+				activetab = true;
+			}
+		}
+	}
+}

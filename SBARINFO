@@ -20,25 +20,29 @@ statusbar fullscreen, forcescaled
 	drawimage "STLIFEBG", -106, 447; //Background
 	drawimage "STLIFED1", -106, 447;
 	drawnumber 3, FONT1, RED, health, 16, 467;
-	IfHealth 26 %
+	IfHealth 101 %
 	{
-	drawimage "STLIFEC1", -106, 447;
-	drawnumber 3, FONT1, ORANGE, health, 16, 467;
+	drawnumber 3, FONT1, CYAN, health, 16, 467;
 	}
-	IfHealth 51 %
-	{
-	drawimage "STLIFEB1", -106, 447;
-	drawnumber 3, FONT1, YELLOW, health, 16, 467;
-	}
+	else
 	IfHealth 76 %
 	{
 	drawimage "STLIFEA1", -106, 447;
 	drawnumber 3, FONT1, GREEN, health, 16, 467;
 	}
-	IfHealth 101 %
+	else
+	IfHealth 51 %
 	{
-	drawnumber 3, FONT1, CYAN, health, 16, 467;
+	drawimage "STLIFEB1", -106, 447;
+	drawnumber 3, FONT1, YELLOW, health, 16, 467;
 	}
+	else
+	IfHealth 26 %
+	{
+	drawimage "STLIFEC1", -106, 447;
+	drawnumber 3, FONT1, ORANGE, health, 16, 467;
+	}
+	else
 	//Shield Display
 	drawimage "STARMRBG", -106, 414; //Background
 	drawbar "STARMRFA", "STARMRFT", armor(100), horizontal, interpolate(4), -100, 431;
