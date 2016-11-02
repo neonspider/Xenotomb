@@ -14,8 +14,7 @@ struct Hud_image {
 	int delay;
 };
 
-[[call("ScriptS"), script("Open")]]
-void map01_open(void);
+void titlemap(void);
 
 void reset_player(void);
 

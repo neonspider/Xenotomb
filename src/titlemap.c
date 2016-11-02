@@ -7,16 +7,12 @@
 
 #include "titlemap.h"
 
-[[call("ScriptS"), script("Open")]]
-void main(void)
+void titlemap(void)
 {
-	if(ACS_GameType() == GAME_TITLE_MAP) {
+	reset_player();
+	show_cutscene();
 		
-		reset_player();
-		show_cutscene();
-		
-		print_msg();
-	}
+	print_msg();
 }
 
 void reset_player(void)
@@ -39,7 +35,7 @@ void print_msg(void)
 		"WELCOME TO THE SIGOURNEY, PLEASE WAIT FOR DIRECTIONS!\n"
 	};
 	
-	// printf("font is availabe: %d\n", ACS_CheckFont(s"SMALLFONT"));
+	// printf("font is available: %d\n", ACS_CheckFont(s"SMALLFONT"));
 	
 	for (int i = 0; i < msg_amount; ++i)
 	{
