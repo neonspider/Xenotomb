@@ -12,6 +12,7 @@ gameinfo
 	//	Still need to make a full wallpaper for this
 	borderflat = "XENOTILE"
 	//	TR-DOS, yo!
+	PlayerClasses = "MyPlayer"
 	menufontcolor_action = "green"
 	menufontcolor_title = "DARKGRAY"
     menufontcolor_label = "DARKGRAY"
@@ -60,6 +61,6 @@ map A10 "Arrival"
 
 map B10 "Fresh Air"
 {
-	sky1 = "BLACK"
+	sky1 = "SKY1"
 	music = "X_AIRLOC"
 }

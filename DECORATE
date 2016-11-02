@@ -1,6 +1,13 @@
 #include "actors/weapons.txt"
 #include "actors/monsters.txt"
 
+Actor MyPlayer : DoomPlayer //Change Player Speed
+{
+    Player.ForwardMove 0.7
+    Player.SideMove 0.7
+	Player.JumpZ 5
+}
+
 Actor SteamSpawner : SwitchableDecoration 10000 //DoomEdNum Here
 {
   Height 2
