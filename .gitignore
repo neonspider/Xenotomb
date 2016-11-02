@@ -7,3 +7,6 @@
 *.db
 
 *.dbs
+
+*.obj
+*.lib

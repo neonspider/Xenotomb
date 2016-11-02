@@ -8,14 +8,15 @@
 #include "titlemap.h"
 
 [[call("ScriptS"), script("Open")]]
-void map01_open(void)
+void main(void)
 {
-	reset_player();
-	show_cutscene();
-	
-	ACS_Delay (300);
-	
-	print_msg();
+	if(ACS_GameType() == GAME_TITLE_MAP) {
+		
+		reset_player();
+		show_cutscene();
+		
+		print_msg();
+	}
 }
 
 void reset_player(void)
@@ -38,17 +39,22 @@ void print_msg(void)
 		"WELCOME TO THE SIGOURNEY, PLEASE WAIT FOR DIRECTIONS!\n"
 	};
 	
+	// printf("font is availabe: %d\n", ACS_CheckFont(s"SMALLFONT"));
+	
 	for (int i = 0; i < msg_amount; ++i)
 	{
+		ACS_Delay(300);
+		
 		ACS_SetFont(s"SMALLFONT");
 		
 		ACS_BeginHudMessage();
-		/*__n*/printf(msg[i]);
+		// int debug = __nprintf(msg[i]);
 		ACS_MoreHudMessage();
 		ACS_OptHudMessage(HUDMSG_TYPEON, 0, CR_DARKGREEN, 0.5, -0.75, 1.0);
 		ACS_EndHudMessage(0.1, 2.5);
 		
-		ACS_Delay(300);
+		printf(msg[i]);
+		// printf("print_msg: %d\n", debug);
 	}
 }
 
