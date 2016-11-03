@@ -44,12 +44,12 @@ void print_msg(void)
 		ACS_SetFont(s"SMALLFONT");
 		
 		ACS_BeginHudMessage();
-		// int debug = __nprintf(msg[i]);
+		/*int debug =*/__nprintf(msg[i]);
 		ACS_MoreHudMessage();
 		ACS_OptHudMessage(HUDMSG_TYPEON, 0, CR_DARKGREEN, 0.5, -0.75, 1.0);
-		ACS_EndHudMessage(0.1, 2.5);
+		ACS_EndHudMessage(/*0.1, 2.5*/);
 		
-		printf(msg[i]);
+		//printf(msg[i]);
 		// printf("print_msg: %d\n", debug);
 	}
 }
