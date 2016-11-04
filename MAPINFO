@@ -55,12 +55,14 @@ map TITLEMAP "TITLEMAP"
 
 map A10 "Arrival"
 {
+	LevelNum = 1
 	sky1 = "SKY1"
 	music = "X_MAP01"
 }
 
 map B10 "Fresh Air"
 {
+	LevelNum = 2
 	sky1 = "SKY1"
 	music = "X_AIRLOC"
 }
