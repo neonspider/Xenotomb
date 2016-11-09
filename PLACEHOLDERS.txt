@@ -1,0 +1,9 @@
+This is a list of placeholder textures or soundes
+that must eventually be recreated by our own ones.
+
+Marathon
+	DSSTNMOV (Moving floor/ceiling/platform)
+	DSPSTART (Activated platform)
+	ALERT (Alert noise) (We can probably use this one, it's CC license)
+	ALERT2 (Alert noise)
+	AMB (Ambient noise)

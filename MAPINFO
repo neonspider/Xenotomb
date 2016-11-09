@@ -5,7 +5,8 @@ gameinfo
 	infopage = "XENOHELP"
 	addinfopage = "XENOCRED"
 	//addinfopage = "XENOWARE"
-	titlemusic = "X_TITLEM"
+	intermissionmusic = "X_INTERM"
+	titlemusic = "MIDRESET"
 	titlepage = "XENOTOMB"
 	advisorytime = 3
 	pagetime = 7
@@ -38,29 +39,29 @@ clearepisodes
 
 episode A10
 {
-   name = "Actual Start"
+   name = "A10 (Actual Start)"
 }
 
 episode B10
 {
-   name = "Outside Section"
+   name = "B10"
 }
 
 
 map TITLEMAP "TITLEMAP"
 {
-	music = "X_TITLEM"
+	music = "MIDRESET"
 }
 
 
 map A10 "Arrival"
 {
-	sky1 = "SKY1"
-	music = "X_MAP01"
+	sky1 = "STAR1"
+	music = "MIDRESET"
 }
 
-map B10 "Fresh Air"
+map B10 "Fresh Air" //Deprecated. This is now map A10. To be replaced.
 {
-	sky1 = "SKY1"
-	music = "X_AIRLOC"
+	sky1 = "STAR1"
+	music = "MIDRESET"
 }
