@@ -1,0 +1,20 @@
+// Must be sorted in identification order (easiest to recognize first!)
+
+IWad
+{
+	Name = "Xenotomb"
+	Autoname = "xenotomb"
+	Game = "Doom"
+	Config = "Doom"
+	Mapinfo = "mapinfo/doom2.txt"
+	MustContain = "XENOTOMB"
+	BannerColors = "33 FF 6E", "3E 5C 67"
+}	
+
+Names
+{	
+	"xenobeta" //Pre 1.0 versions of Xenotomb
+	"xenodemo" //Three map demo of Xenotomb
+	"xenotomb" //1.0 onwards full Xenotomb
+	"xenoware" //1.1 onwards shareware Xenotomb?
+}
