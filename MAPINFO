@@ -56,25 +56,12 @@ map TITLEMAP "TITLEMAP"
 
 map A10 "Arrival"
 {
-<<<<<<< HEAD
 	sky1 = "STAR1"
 	music = "MIDRESET"
-=======
-	LevelNum = 1
-	sky1 = "SKY1"
-	music = "X_MAP01"
->>>>>>> origin/master
 }
 
 map B10 "Fresh Air" //Deprecated. This is now map A10. To be replaced.
 {
-<<<<<<< HEAD
 	sky1 = "STAR1"
 	music = "MIDRESET"
 }
-=======
-	LevelNum = 2
-	sky1 = "SKY1"
-	music = "X_AIRLOC"
-}
->>>>>>> origin/master
