@@ -1,0 +1,98 @@
+#include "zcommon.acs"
+
+int gravitytext = "";
+int skiptext = TRUE;
+
+script "Info" ENTER //Map start cutscene
+{
+	FadeTo (0, 0, 0, 1.0, 0.0);
+	ClearInventory ();
+	ChangeCamera (4,0,0);
+	SetHudSize (640,480,false);
+	SetFont ("FONTA");
+	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cfInitializing..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.025, 1.0);
+    Delay (35 * 5);
+	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cnInitialized..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.025, 1.0);
+    Delay (35 * 6);
+    FadeTo (0, 0, 0, 0.0, 2.0);
+    Delay (35 * 1);
+	Thing_Activate (4);
+	Delay (35 * 5);
+	FadeTo (0, 0, 0, 1.0, 0.2);
+	Delay (35 * 1);
+	ChangeCamera (0,0,0);
+	FadeTo (0, 0, 0, 0.0, 0.2);
+}
+
+//script "Skip Text" ENTER
+//{
+	//while (TRUE)
+	//{
+	//HudMessage (s:"Press 'USE' to skip story sequences"; HUDMSG_PLAIN, 0, CR_WHITE, 0, 0, 0.9, 0.1, 1.0);
+	//Delay (30);
+	//}
+//}
+
+script "Spark Intro Door" ENTER
+{
+	while (TRUE)
+	{
+	Thing_Deactivate (3); //Light Off
+	Thing_Activate (7); //Spark
+	Delay(10);
+	Thing_Activate (3); //Light On
+	Delay(Random(20, 164));
+	}
+}
+
+script "Intro Airlock" (void) //Opening airlock door
+{
+	Thing_Activate (1);
+	SetThingSpecial (2,0,255,0,0);
+	SetThingSpecial (3,0,255,0,0);
+    Delay (35 * 5);
+	Thing_Deactivate (1);
+	SetHudSize (640,480,false);
+	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+    Delay (35 * 1);
+	SetThingSpecial (2,0,0,255,0);
+	SetThingSpecial (3,0,255,100,0);
+	SetAirControl (0.001);
+	SetGravity (150.0);
+	gravitytext = "LOW GRAVITY";
+	Pillar_Open	(1,6,64,64);
+	Delay (35 * 5);
+	Pillar_Open (1,6,-64,-64);
+}
+
+script "Gravity Text" ENTER //Gravity indicator
+{
+	while(TRUE)
+	{
+	HudMessage (s:gravitytext; HUDMSG_PLAIN, 0, CR_YELLOW, 0, 1, 0.9, 0.1, 1.0);
+	Delay (30);
+	}
+}
+
+script "Location 1" (void)
+{
+	
+}
+
+script "Exit Airlock" (void) //Opening airlock door
+{
+	Thing_Activate (1);
+	SetThingSpecial (7,0,255,0,0);
+    Delay (35 * 5);
+	Thing_Deactivate (1);
+	SetHudSize (640,480,false);
+	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+    Delay (35 * 1);
+	SetThingSpecial (7,0,0,255,0);
+	SetAirControl (0.001);
+	SetGravity (150.0);
+	gravitytext = "LOW GRAVITY";
+	Pillar_Open	(8,6,64,64);
+	Delay (35 * 5);
+	Pillar_Open (8,6,-64,-64);
+}
