@@ -1,6 +1,2 @@
 This is a list of all used resources in the current version of the project
 Xenotomb. See the placeholders file for things that are subject to change.
-
-James Freeman
-	Reset MIDI
-	
