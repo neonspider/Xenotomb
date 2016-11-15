@@ -37,39 +37,43 @@ rem uses only newest .wad  in each directory
 rem
 rem **********************************
 
-SET _script_exist=
-
 rem go through each directory in src\maps
 FOR /D %%G IN (src\maps\*) DO (
 	rem check for .wad files
 	IF EXIST %%G\*.wad (
+		IF NOT EXIST maps\ MKDIR maps\
+		
+		ECHO map files found in %%G
+
+		rem get immediate map directory			
+		SET _wad_path=%%G
+		SET _wad_full_path=%%~fG
+		SET _wad_directory=!_wad_path:*src\=!
+			
+		rem get newest map in folder in case of multiple .wads
+		FOR /F %%H IN ('DIR %%G\*.wad /O:D /B') DO (
+			SET _newest_map=%%~nxH
+		)
+			
+		SET _newest_map_full_path=!_wad_full_path!\!_newest_map!
+			
+		ECHO using map file !_newest_map_full_path!
+			
+		REM ECHO _wad_path = !_wad_path!
+		REM ECHO _wad_full_path = !_wad_full_path!
+		REM ECHO _wad_directory = !_wad_directory!
+		REM ECHO _newest_map = !_newest_map!
+		REM ECHO _newest_map_full_path = !_newest_map_full_path!
+		
 		rem check for scripts
+		SET "_script_exist="
+		
 		IF EXIST %%G\*.acs	SET _script_exist=1
 		IF EXIST %%G\*.c	SET _script_exist=1
 		
-		IF "!_script_exist!"=="1" (
-			ECHO map files found in %%G
-
-			rem get immediate map directory			
-			SET _wad_path=%%G
-			SET _wad_full_path=%%~fG
-			SET _wad_directory=!_wad_path:*src\=!
-			
-			rem get newest map in folder in case of multiple .wads
-			FOR /F %%H IN ('DIR %%G\*.wad /O:D /B') DO (
-				SET _newest_map=%%~nxH
-			)
-			
-			SET _newest_map_full_path=!_wad_full_path!\!_newest_map!
-			
-			ECHO using map file !_newest_map_full_path!
-			
-			REM ECHO _wad_path = !_wad_path!
-			REM ECHO _wad_full_path = !_wad_full_path!
-			REM ECHO _wad_directory = !_wad_directory!
-			REM ECHO _newest_map = !_newest_map!
-			REM ECHO _newest_map_full_path = !_newest_map_full_path!
-			
+		ECHO _script_exist = !_script_exist!
+		
+		IF "!_script_exist!"=="1" (	
 			rem extract map .wad into \ir directory
 			IF NOT EXIST ir\!_wad_directory! MKDIR ir\!_wad_directory!
 			..\GDCC\gdcc-ar-wad.exe wad:"!_newest_map_full_path!" --output "ir\!_wad_directory!" --extract
@@ -99,7 +103,6 @@ FOR /D %%G IN (src\maps\*) DO (
 			..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_wad_directory!\*.obj ir\!_wad_directory!\behavior.lib
 			
 			rem pack everything into wad file in \maps
-			IF NOT EXIST maps\ MKDIR maps\
 			
 rem 	MAP01		empty
 rem 	TEXTMAP		extracted TEXTMAP from map .wad
@@ -114,6 +117,8 @@ rem 	ENDMAP		empty
 		) ELSE (
 			rem no scripts
 			ECHO no scripts exist in %%G
+			
+			MOVE "!_newest_map_full_path!" "maps\!_newest_map!"
 		) 
 	) ELSE (
 		rem no maps
