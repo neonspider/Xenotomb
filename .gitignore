@@ -16,11 +16,11 @@
 *.bak
 
 # ignore ACS binaries
-acs\
-ir\
+acs/
+ir/
 
 # compiled maps - map sources go in \src\maps
-maps\
+maps/
 
 # make your own run.bat for testing
 run.bat
