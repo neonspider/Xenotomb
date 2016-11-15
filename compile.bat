@@ -37,36 +37,79 @@ rem uses only newest .wad  in each directory
 rem
 rem **********************************
 
+SET _script_exist=
+
 rem go through each directory in src\maps
 FOR /D %%G IN (src\maps\*) DO (
 	rem check for .wad files
 	IF EXIST %%G\*.wad (
 		rem check for scripts
-		SET "_script_exist="
-		IF EXIST %%G\.acs SET _script_exist=1
-		IF EXIST %%G\.c SET _script_exist=1
+		IF EXIST %%G\*.acs	SET _script_exist=1
+		IF EXIST %%G\*.c	SET _script_exist=1
 		
 		IF "!_script_exist!"=="1" (
 			ECHO map files found in %%G
 
 			rem get immediate map directory			
 			SET _wad_path=%%G
+			SET _wad_full_path=%%~fG
 			SET _wad_directory=!_wad_path:*src\=!
 			
 			rem get newest map in folder in case of multiple .wads
-			FOR /F %%H IN ('DIR %%G\*.wad /O:D /B') DO SET _newest_map=%%H
+			FOR /F %%H IN ('DIR %%G\*.wad /O:D /B') DO (
+				SET _newest_map=%%~nxH
+			)
+			
+			SET _newest_map_full_path=!_wad_full_path!\!_newest_map!
+			
+			ECHO using map file !_newest_map_full_path!
+			
+			REM ECHO _wad_path = !_wad_path!
+			REM ECHO _wad_full_path = !_wad_full_path!
+			REM ECHO _wad_directory = !_wad_directory!
+			REM ECHO _newest_map = !_newest_map!
+			REM ECHO _newest_map_full_path = !_newest_map_full_path!
 			
 			rem extract map .wad into \ir directory
-			..\GDCC\gdcc-ar-wad.exe wad:"!_newest_map!" --output "ir\!_wad_directory!" --extract
-			ECHO extracted map to "ir\maps\!_wad_directory!"
+			IF NOT EXIST ir\!_wad_directory! MKDIR ir\!_wad_directory!
+			..\GDCC\gdcc-ar-wad.exe wad:"!_newest_map_full_path!" --output "ir\!_wad_directory!" --extract
+			ECHO extracted map to "ir\!_wad_directory!"
 			
 			rem compile all acs scripts
+			IF EXIST %%G\*.acs (
+				ECHO compiling ACS scripts...
+				..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom -c !_wad_path!\*.acs ir\!_wad_directory!\acs.obj
+			)
 			
 			rem compile all c scripts
+			IF EXIST %%G\*.c (
+				IF NOT EXIST acs\ MKDIR acs\
+			
+				IF NOT EXIST acs\libc.lib (
+					ECHO compiling LIBC...
+					..\GDCC\gdcc-makelib.exe --bc-target=ZDoom --bc-zdacs-init-delay --alloc-min Sta "" 1000000000 libGDCC libc -o acs\libc.lib
+				)
+				
+				ECHO compiling C scripts...
+				..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom -c !_wad_path!\*.c ir\!_wad_directory!\c.obj
+			)
 			
 			rem link scripts into BEHAVIOR file
+			ECHO linking scripts...
+			..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_wad_directory!\*.obj ir\!_wad_directory!\behavior.lib
 			
 			rem pack everything into wad file in \maps
+			IF NOT EXIST maps\ MKDIR maps\
+			
+rem 	MAP01		empty
+rem 	TEXTMAP		extracted TEXTMAP from map .wad
+rem 	SCRIPTS		map script source (not 100% necessary)
+rem 	BEHAVIOR	compiled map script
+rem 	ZNODES		extracted ZNODES from map .wad
+rem 	ENDMAP		empty
+
+			ECHO packing into maps\!_newest_map!
+			..\GDCC\gdcc-ar-wad.exe file:MAP01="ir\!_wad_directory!\MAP01\MAP01" file:TEXTMAP="ir\!_wad_directory!\MAP01\TEXTMAP" file:BEHAVIOR="ir\!_wad_directory!\behavior.lib" file:ZNODES="ir\!_wad_directory!\MAP01\ZNODES" file:ENDMAP="ir\!_wad_directory!\MAP01\ENDMAP" --output "maps\!_newest_map!"
 			
 		) ELSE (
 			rem no scripts
