@@ -1,6 +1,6 @@
 #include "zcommon.acs"
 
-int gravitytext = "";
+str gravitytext = "";
 int skiptext = TRUE;
 
 script "Info" ENTER //Map start cutscene
