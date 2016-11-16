@@ -1,12 +1,26 @@
-*.lnk
-
+# compressed files - result of build scripts?
 *.pk3
-
 *.zip
 
+# Windows generated files
+*.lnk
 *.db
-
 *.dbs
 
-*.obj
-*.lib
+# GZDoom Builder backup files - that's what git's for
+*.backup1
+*.backup2
+*.backup3
+
+# SLADE backup files - ditto
+*.bak
+
+# ignore ACS binaries
+acs/
+ir/
+
+# compiled maps - map sources go in \src\maps
+maps/
+
+# make your own run.bat for testing
+run.bat

@@ -1,0 +1,171 @@
+#include "zcommon.acs"
+
+str gravitytext = "";
+int skiptext = TRUE;
+
+script "Cutscene" ENTER //Map start cutscene
+{
+	SetMusic ("MIDRESET");
+	FadeTo (0, 0, 0, 1.0, 0.0);
+	ClearInventory ();
+	AmbientSound("Cutscene/A10a_sfx", 127);
+	Delay (16);
+	SetMusic ("X_LOADIN");
+	SetHudSize (640,480,0);
+	SetFont ("FONTA");
+	HudMessage (s:"DOCK CONNECTION ESTABLISHED..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_GREEN, 320.0, 200.0, 3.0, 0.02, 1.0);
+    Delay (35 * 5);
+	SetFont("CUTA10A1");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	Delay (35 * 6);
+	SetFont ("CUTA10B1");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,8,CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	Delay (35 * 6);
+	SetFont ("CUTA10A1");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,7,CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	Delay (35 * 1);
+	SetFont ("CUTA10A2");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,6,CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	Delay (24);
+	SetFont ("CUTA10A3");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,5,CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	Delay (24);
+	SetFont ("CUTA10A4");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,4,CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	Delay (35 * 4);
+	SetFont ("CUTA10B1");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,3,CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	Delay (35 * 6);
+	SetFont ("CUTA10C1");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	Delay (35 * 3);
+	SetFont ("CUTA10C2");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,8,CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	Delay (35 * 5);
+	SetFont ("CUTA10D1");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	Delay (35 * 4);
+	SetFont ("CUTA10E1");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	Delay (35 * 4);
+	SetFont ("CUTA10F1");
+	HudMessage (s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	Delay (35 * 3);
+	FadeTo (100, 20, 0, 1.0, 0.0);
+	SetFont ("CUTA10F2");
+	FadeTo (0, 0, 0, 1.0, 1.0);
+	HudMessage (s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	Delay (35 * 6);
+	ACS_NamedExecute ("Info", 0, 0, 0, 0);
+	ACS_NamedExecute ("Spark Intro Door", 0, 0, 0, 0);
+}
+
+script "Info" (void) //Map start cutscene
+{
+	ChangeCamera (4,0,0);
+	SetHudSize (640,480,false);
+	SetFont ("FONTA");
+	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cfInitializing..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
+    Delay (35 * 5);
+	PlaySound (0, "Computer/Alert2");
+	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cnInitialized..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
+    Delay (35 * 6);
+    FadeTo (0, 0, 0, 0.0, 2.0);
+    Delay (35 * 1);
+	Thing_Activate (4);
+	Delay (35 * 5);
+	FadeTo (0, 0, 0, 1.0, 0.2);
+	Delay (35 * 1);
+	ChangeCamera (0,0,0);
+	FadeTo (0, 0, 0, 0.0, 0.2);
+	SetMusicVolume (0);
+	SetMusic ("X_ARRIVE");
+	Delay (100);
+	SetMusicVolume (100.0);
+}
+
+//script "Skip Text" ENTER //Still needs the crossmap script to be implemented before we use this.
+//{
+	//while (TRUE)
+	//{
+	//HudMessage (s:"Press 'USE' to skip story sequences"; HUDMSG_PLAIN, 0, CR_WHITE, 0, 0, 0.9, 0.1, 1.0);
+	//Delay (30);
+	//}
+//}
+
+script "Spark Intro Door" (void)
+{
+	while (TRUE)
+	{
+	Thing_Deactivate (3); //Light Off
+	Thing_Activate (7); //Spark
+	Delay(10);
+	Thing_Activate (3); //Light On
+	Delay(Random(20, 164));
+	}
+}
+
+script "Intro Airlock" (void) //Opening airlock door
+{
+	Thing_Activate (1);
+	SetThingSpecial (2,0,255,0,0);
+	SetThingSpecial (3,0,255,0,0);
+    Delay (35 * 5);
+	Thing_Deactivate (1);
+	SetHudSize (640,480,false);
+	PlaySound (0, "Computer/Alert");
+	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+    Delay (35 * 1);
+	SetThingSpecial (2,0,0,255,0);
+	SetThingSpecial (3,0,255,100,0);
+	SetAirControl (0.001);
+	SetGravity (150.0);
+	SetPlayerProperty (0, 0.5, "Player.ForwardMove");
+	gravitytext = "LOW GRAVITY";
+	Pillar_Open	(1,6,64,64);
+	Delay (35 * 5);
+	Pillar_Open (1,6,-64,-64);
+}
+
+script "Gravity Text" ENTER //Gravity indicator
+{
+	while(TRUE)
+	{
+	HudMessage (s:gravitytext; HUDMSG_PLAIN, 0, CR_YELLOW, 0, 1, 0.9, 0.1, 1.0);
+	Delay (30);
+	}
+}
+
+script "Location 1" (void)
+{
+	
+}
+
+script "Exit Script" (void) //Exiting script
+{
+	FadeTo(0,0,0,1.0,1.0);
+	Delay(35*2);
+	SetHudSize (640,480,false);
+	SetFont ("FONTA");
+	HudMessage (s:"INCOMING MESSAGE FROM \caAVALON PATROL"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
+	Delay(35*4);
+	Exit_Normal(0);
+}
+
+script "Exit Airlock" (void) //Opening airlock door
+{
+	Thing_Activate (1);
+	SetThingSpecial (7,0,255,0,0);
+    Delay (35 * 5);
+	Thing_Deactivate (1);
+	SetHudSize (640,480,false);
+	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+    Delay (35 * 1);
+	SetThingSpecial (7,0,0,255,0);
+	SetAirControl (0.001);
+	SetGravity (150.0);
+	gravitytext = "LOW GRAVITY";
+	Pillar_Open	(8,6,64,64);
+	Delay (35 * 5);
+	Pillar_Open (8,6,-64,-64);
+}
