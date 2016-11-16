@@ -1,6 +1,6 @@
-#include "actors/weapons.txt"
-#include "actors/monsters.txt"
-#include "actors/decorations.txt"
+#include "actors/weapons.dec"
+#include "actors/monsters.dec"
+#include "actors/decorations.dec"
 Actor MyPlayer : DoomPlayer //Change Player Speed
 {
     Player.ForwardMove 0.7
