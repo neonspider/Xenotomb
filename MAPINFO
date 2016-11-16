@@ -56,12 +56,14 @@ map TITLEMAP "TITLEMAP"
 
 map A10 "Arrival"
 {
+	LevelNum = 1
 	sky1 = "STAR1"
 	music = "MIDRESET"
 }
 
 map B10 "Fresh Air" //Deprecated. This is now map A10. To be replaced.
 {
+	LevelNum = 2
 	sky1 = "STAR1"
 	music = "MIDRESET"
 }

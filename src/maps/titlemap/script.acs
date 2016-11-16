@@ -1,23 +1,44 @@
 #include "zcommon.acs"
 
-#define TAGLINE_AMOUNT	14
+#define TAGLINE_AMOUNT	35
 
-str tagline[TAGLINE_AMOUNT] = //Ideally it will usually be the top one with a smaller chance or something of the others.
+str tagline[TAGLINE_AMOUNT] =
 {
+	"",
 	"New games. Timeless classics.",
+	"",
 	"New classics. Timeless games.",
+	"",
 	"Timeless games. New classics.",
+	"",
+	"Timeless classics. New games.",
+	"",
+	"Frog blast the vent core!",
+	"",
 	"A blast to the past!",
+	"",
 	"We're failing school for this!",
+	"",
 	"IDDQD!",
+	"",
 	"Ereh saw oremor!",
+	"",
 	"Almost crash free!",
+	"",
 	"We aren't rich!",
+	"",
 	"We use a 486!",
+	"",
 	"Made right under the nose of Bran Bran!",
+	"",
 	"Now Adlib Compatible!",
+	"",
 	"Lamb brains are gross!",
-	"Where are corridors one through seven?"
+	"",
+	"Where are corridors one through seven?",
+	"",
+	"It's a real company, we promise!",
+	"",
 };
 
 script 1 OPEN
@@ -25,7 +46,7 @@ script 1 OPEN
 	ClearInventory();
 	SetMusic("MIDRESET");
 	Delay (8);
-	SetMusic("GAMESTAR");
+	SetMusic("FANFARE");
 	SetHudSize(640,480,0);
 	SetFont("STAR1");
 	HudMessage(s:"A";HUDMSG_FADEINOUT,10,CR_UNTRANSLATED, 320.0, 240.0, 5.0, 2.0, 1.0);
@@ -33,7 +54,7 @@ script 1 OPEN
 	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 320.0, 240.0, 5.0, 2.0, 1.0);
 	Delay (35*3);
 	SetFont("FONTA");
-	HudMessage(s:tagline[Random(0, TAGLINE_AMOUNT - 1)]; HUDMSG_FADEINOUT, 0, CR_WHITE, 320.0, 440.0, 3.0, 1.0, 1.0); //Joseph can you set this up please?
+	HudMessage(s:tagline[Random(0, TAGLINE_AMOUNT - 1)]; HUDMSG_FADEINOUT, 0, CR_WHITE, 320.0, 440.0, 3.0, 1.0, 1.0);
 	Delay (35*6);
 	SetMusic("");
 	Delay (35*2);

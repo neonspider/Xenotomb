@@ -1,0 +1,12 @@
+The plan is to release a three level build when we announce the project
+to show an idea of what our game will be. Each level will have some distinct
+differences and showcase various elements of our game.
+
+A10 - The 'first level' of the game, introducing the plot and gameplay. Indoors.
+
+B10 - Low gravity section, set on the exterior of the spaceship. Outdoor combat.
+
+WS10 - Zombies/Horder style wave survival map on an alien moon (Titan).
+
+Useable weapons include the Baton, Pistol, and SMG in A10, Baton Pistol and
+Autogun in B10, and the Baton, Pistol and Shotgun in S10.
