@@ -37,6 +37,59 @@ rem uses only newest .wad  in each directory
 rem
 rem **********************************
 
+rem LIB COMPILATION
+rem go through each directory in src\lib
+FOR /D %%G IN (src\lib\*) DO (
+	rem check for scripts
+	SET "_lib_script_exist="
+	
+	IF EXIST %%G\*.acs	SET _lib_script_exist=1
+	IF EXIST %%G\*.c	SET _lib_script_exist=1
+	
+	ECHO _lib_script_exist = !_lib_script_exist!
+	
+	IF "!_lib_script_exist!"=="1" (
+		ECHO scripts found in %%G
+	
+		rem get immediate map directory			
+		SET _lib_path=%%G
+		SET _lib_full_path=%%~fG
+		SET _lib_directory=!_lib_path:*src\=!
+		SET _lib_name=!_lib_path:*lib\=!
+		
+		IF NOT EXIST ir\!_lib_directory! MKDIR ir\!_lib_directory!
+		IF NOT EXIST acs\ MKDIR acs\
+	
+		rem compile all acs scripts
+		IF EXIST %%G\*.acs (
+			ECHO compiling ACS scripts...
+			..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom -c !_lib_path!\*.acs ir\!_lib_directory!\acs.obj
+		)
+		
+		rem compile all c scripts
+		IF EXIST %%G\*.c (
+			IF NOT EXIST acs\libc.lib (
+				ECHO compiling LIBC...
+				..\GDCC\gdcc-makelib.exe --bc-target=ZDoom --bc-zdacs-init-delay --alloc-min Sta "" 1000000000 libGDCC libc -o acs\libc.lib
+			)
+			
+			ECHO compiling C scripts...
+			..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom -c !_lib_path!\*.c ir\!_lib_directory!\c.obj
+		)
+		
+		rem link scripts into BEHAVIOR file
+		ECHO linking scripts...
+		..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_lib_directory!\*.obj acs\!_lib_name!.lib
+		
+		IF NOT EXIST LOADACS.txt ECHO. LOADACS.txt
+		ECHO !_lib_name!>> LOADACS.txt
+		ECHO.
+	) ELSE (
+		ECHO no scripts found in %%G
+	)
+)
+
+rem MAP COMPILATION
 rem go through each directory in src\maps
 FOR /D %%G IN (src\maps\*) DO (
 	rem check for .wad files
