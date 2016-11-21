@@ -1,0 +1,65 @@
+#include "zcommon.acs"
+
+// adapted from "freezelook.wad". I downloaded it somewhere from zdoom.org, but can't find the original wad now
+
+function int floor(int x) // from https://zdoom.org/wiki/Fixed_floor
+ {
+     return ((x - 65535) & 0xFFFF0000) + 1.0; // adding 1.0 seems to make it work properly
+ }
+
+script "FreezeLook" ENTER
+{
+	// freeze the player
+	//SetPlayerProperty(0, ON, PROP_TOTALLYFROZEN);
+	//GiveInventory("PowerFlight", 1);
+	
+	int angle = 0;
+	int pitch = 0;
+	
+	// an endless loop
+	while(TRUE)
+	{
+		// poll the player's input
+		int d_angle = GetPlayerInput(-1, INPUT_YAW);
+		int d_pitch = GetPlayerInput(-1, INPUT_PITCH);
+		
+		pitch -= d_pitch; // pitch is negative
+		
+		//Log(s:"angle: ", f:angle);
+		//Log(s:"pitch: ", f:pitch);
+		
+		// set the player's angle and pitch based on what was received
+		// with interpolation set to true for non-jittery movement
+		
+		int new_pitch = pitch + 0.25;
+		new_pitch -= floor(new_pitch);
+		
+		int new_angle;
+		int new_roll;
+		
+		if(new_pitch > 0.5) {
+			new_pitch = 1.0 - new_pitch;
+			
+			angle -= d_angle;
+			new_angle = angle + 0.5;
+			new_angle -= floor(new_angle);
+			
+			new_roll = 0.5;
+		} else {
+			angle += d_angle;
+			new_angle = angle;
+			new_angle -= floor(new_angle);
+			
+			new_roll = 0;
+		}
+		
+		new_pitch -= 0.25;
+		
+		ChangeActorAngle(0, new_angle, TRUE);
+		ChangeActorPitch(0, new_pitch, TRUE);
+		ChangeActorRoll (0, new_roll, FALSE);
+		
+		// loops need a 1 tic delay to prevent runaway errors
+		Delay(1);
+	}
+}
