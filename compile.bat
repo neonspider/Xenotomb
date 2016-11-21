@@ -1,4 +1,4 @@
-@echo off
+@ECHO off
 SETLOCAL ENABLEDELAYEDEXPANSION
 
 rem ************* TODO - LIBRARY COMPILATION ******************
@@ -37,19 +37,33 @@ rem uses only newest .wad  in each directory
 rem
 rem **********************************
 
+rem delete all binaries and maps
+ECHO(
+ECHO Clearing intermediary compilation files...
+RD /S /Q ir
+RD /Q maps\
+
+rem delete all libraries except for libc
+FOR %%I IN (acs\*) DO IF NOT %%I == acs\libc.lib DEL /Q %%I
+
 rem LIB COMPILATION
 rem go through each directory in src\lib
+ECHO(
+ECHO Compiling libraries...
+
 FOR /D %%G IN (src\lib\*) DO (
 	rem check for scripts
+	
+	ECHO(
+	ECHO Checking library %%G...
+	
 	SET "_lib_script_exist="
 	
 	IF EXIST %%G\*.acs	SET _lib_script_exist=1
 	IF EXIST %%G\*.c	SET _lib_script_exist=1
 	
-	ECHO _lib_script_exist = !_lib_script_exist!
-	
 	IF "!_lib_script_exist!"=="1" (
-		ECHO scripts found in %%G
+		ECHO Scripts found in %%G.
 	
 		rem get immediate map directory			
 		SET _lib_path=%%G
@@ -62,41 +76,46 @@ FOR /D %%G IN (src\lib\*) DO (
 	
 		rem compile all acs scripts
 		IF EXIST %%G\*.acs (
-			ECHO compiling ACS scripts...
+			ECHO Compiling ACS scripts...
 			..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom -c !_lib_path!\*.acs ir\!_lib_directory!\acs.obj
 		)
 		
 		rem compile all c scripts
 		IF EXIST %%G\*.c (
-			IF NOT EXIST acs\libc.lib (
-				ECHO compiling LIBC...
-				..\GDCC\gdcc-makelib.exe --bc-target=ZDoom --bc-zdacs-init-delay --alloc-min Sta "" 1000000000 libGDCC libc -o acs\libc.lib
-			)
+			CALL :BUILD_LIBC
 			
-			ECHO compiling C scripts...
+			ECHO Compiling C scripts...
 			..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom -c !_lib_path!\*.c ir\!_lib_directory!\c.obj
 		)
 		
 		rem link scripts into BEHAVIOR file
-		ECHO linking scripts...
+		ECHO Linking scripts...
 		..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_lib_directory!\*.obj acs\!_lib_name!.lib
 		
-		IF NOT EXIST LOADACS.txt ECHO. LOADACS.txt
+		IF NOT EXIST LOADACS.txt (
+			ECHO(> LOADACS.txt
+		)
+		
 		ECHO !_lib_name!>> LOADACS.txt
-		ECHO.
+		ECHO Library %%G compiled.
 	) ELSE (
-		ECHO no scripts found in %%G
+		ECHO No scripts found in %%G.
 	)
 )
 
 rem MAP COMPILATION
+ECHO(
+ECHO Compiling maps...
 rem go through each directory in src\maps
 FOR /D %%G IN (src\maps\*) DO (
+	ECHO(
+	ECHO Checking map %%G...
+
 	rem check for .wad files
 	IF EXIST %%G\*.wad (
 		IF NOT EXIST maps\ MKDIR maps\
 		
-		ECHO map files found in %%G
+		ECHO Map files found in %%G.
 
 		rem get immediate map directory			
 		SET _wad_path=%%G
@@ -110,7 +129,7 @@ FOR /D %%G IN (src\maps\*) DO (
 			
 		SET _newest_map_full_path=!_wad_full_path!\!_newest_map!
 			
-		ECHO using map file !_newest_map_full_path!
+		ECHO Using map file !_newest_map_full_path!
 			
 		REM ECHO _wad_path = !_wad_path!
 		REM ECHO _wad_full_path = !_wad_full_path!
@@ -124,17 +143,17 @@ FOR /D %%G IN (src\maps\*) DO (
 		IF EXIST %%G\*.acs	SET _script_exist=1
 		IF EXIST %%G\*.c	SET _script_exist=1
 		
-		ECHO _script_exist = !_script_exist!
-		
-		IF "!_script_exist!"=="1" (	
+		IF "!_script_exist!"=="1" (
+			ECHO Found scripts in %%G.
+			
 			rem extract map .wad into \ir directory
+			ECHO Extracting map to "ir\!_wad_directory!"...
 			IF NOT EXIST ir\!_wad_directory! MKDIR ir\!_wad_directory!
 			..\GDCC\gdcc-ar-wad.exe wad:"!_newest_map_full_path!" --output "ir\!_wad_directory!" --extract
-			ECHO extracted map to "ir\!_wad_directory!"
 			
 			rem compile all acs scripts
 			IF EXIST %%G\*.acs (
-				ECHO compiling ACS scripts...
+				ECHO Compiling ACS scripts...
 				..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom -c !_wad_path!\*.acs ir\!_wad_directory!\acs.obj
 			)
 			
@@ -142,17 +161,14 @@ FOR /D %%G IN (src\maps\*) DO (
 			IF EXIST %%G\*.c (
 				IF NOT EXIST acs\ MKDIR acs\
 			
-				IF NOT EXIST acs\libc.lib (
-					ECHO compiling LIBC...
-					..\GDCC\gdcc-makelib.exe --bc-target=ZDoom --bc-zdacs-init-delay --alloc-min Sta "" 1000000000 libGDCC libc -o acs\libc.lib
-				)
+				CALL :BUILD_LIBC
 				
-				ECHO compiling C scripts...
+				ECHO Compiling C scripts...
 				..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom -c !_wad_path!\*.c ir\!_wad_directory!\c.obj
 			)
 			
 			rem link scripts into BEHAVIOR file
-			ECHO linking scripts...
+			ECHO Linking scripts...
 			..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_wad_directory!\*.obj ir\!_wad_directory!\behavior.lib
 			
 			rem pack everything into wad file in \maps
@@ -164,17 +180,36 @@ rem 	BEHAVIOR	compiled map script
 rem 	ZNODES		extracted ZNODES from map .wad
 rem 	ENDMAP		empty
 
-			ECHO packing into maps\!_newest_map!
+			ECHO Packing files into maps\!_newest_map!...
 			..\GDCC\gdcc-ar-wad.exe file:MAP01="ir\!_wad_directory!\MAP01\MAP01" file:TEXTMAP="ir\!_wad_directory!\MAP01\TEXTMAP" file:BEHAVIOR="ir\!_wad_directory!\behavior.lib" file:ZNODES="ir\!_wad_directory!\MAP01\ZNODES" file:ENDMAP="ir\!_wad_directory!\MAP01\ENDMAP" --output "maps\!_newest_map!"
 			
 		) ELSE (
 			rem no scripts
-			ECHO no scripts exist in %%G
+			ECHO No scripts found in %%G.
+			
+			ECHO Moving map file...
 			
 			MOVE "!_newest_map_full_path!" "maps\!_newest_map!"
 		) 
 	) ELSE (
 		rem no maps
-		ECHO no maps exist in %%G
+		ECHO No maps found in %%G.
 	)
 )
+
+ECHO(
+ECHO Compilation complete.
+
+GOTO :EOF
+
+:BUILD_LIBC
+ECHO Checking libc...
+
+IF NOT EXIST acs\libc.lib (
+	ECHO Compiling libc...
+	..\GDCC\gdcc-makelib.exe --bc-target=ZDoom --bc-zdacs-init-delay --alloc-min Sta "" 1000000000 libGDCC libc -o acs\libc.lib
+) ELSE (
+	ECHO libc already exists.
+)
+
+EXIT /B
