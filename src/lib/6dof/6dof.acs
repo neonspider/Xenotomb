@@ -11,7 +11,6 @@ script "FreezeLook" ENTER
 {
 	// freeze the player
 	//SetPlayerProperty(0, ON, PROP_TOTALLYFROZEN);
-	//GiveInventory("PowerFlight", 1);
 	
 	int angle = 0;
 	int pitch = 0;
@@ -58,6 +57,8 @@ script "FreezeLook" ENTER
 		ChangeActorAngle(0, new_angle, TRUE);
 		ChangeActorPitch(0, new_pitch, TRUE);
 		ChangeActorRoll (0, new_roll, FALSE);
+		
+		GiveInventory("PowerFlight", 1);
 		
 		// loops need a 1 tic delay to prevent runaway errors
 		Delay(1);
