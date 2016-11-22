@@ -40,8 +40,9 @@ rem **********************************
 rem delete all binaries and maps
 ECHO(
 ECHO Clearing intermediary compilation files...
-RD /S /Q ir
-RD /Q maps\
+RD /Q /S ir
+RD /Q /S maps\
+DEL /Q LOADACS.txt
 
 rem delete all libraries except for libc
 FOR %%I IN (acs\*) DO IF NOT %%I == acs\libc.lib DEL /Q %%I
@@ -199,6 +200,8 @@ rem 	ENDMAP		empty
 
 ECHO(
 ECHO Compilation complete.
+
+PAUSE
 
 GOTO :EOF
 
