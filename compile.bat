@@ -94,7 +94,7 @@ FOR /D %%G IN (src\lib\*) DO (
 		..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_lib_directory!\*.obj acs\!_lib_name!.lib
 		
 		ECHO !_lib_name!> LOADACS.txt
-		ECHO Library %%G compiled.
+		ECHO Library '!_lib_name!' compiled.
 	) ELSE (
 		ECHO No scripts found in %%G.
 	)
@@ -187,7 +187,11 @@ rem 	ENDMAP		empty
 			ECHO Moving map file...
 			
 			MOVE "!_newest_map_full_path!" "maps\!_newest_map!"
-		) 
+		)
+	SET _echo_map_dir=%%G
+	SET _echo_map_name=!_echo_map_dir:*src\maps\=!
+		
+	ECHO Map '!_echo_map_name!' compiled.
 	) ELSE (
 		rem no maps
 		ECHO No maps found in %%G.
