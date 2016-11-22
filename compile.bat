@@ -40,9 +40,9 @@ rem **********************************
 rem delete all binaries and maps
 ECHO(
 ECHO Clearing intermediary compilation files...
-RD /Q /S ir
-RD /Q /S maps\
-DEL /Q LOADACS.txt
+IF EXIST ir\         RD /Q /S ir\
+IF EXIST maps\       RD /Q /S maps\
+IF EXIST LOADACS.txt DEL /Q LOADACS.txt
 
 rem delete all libraries except for libc
 FOR %%I IN (acs\*) DO IF NOT %%I == acs\libc.lib DEL /Q %%I
@@ -93,11 +93,7 @@ FOR /D %%G IN (src\lib\*) DO (
 		ECHO Linking scripts...
 		..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_lib_directory!\*.obj acs\!_lib_name!.lib
 		
-		IF NOT EXIST LOADACS.txt (
-			ECHO(> LOADACS.txt
-		)
-		
-		ECHO !_lib_name!>> LOADACS.txt
+		ECHO !_lib_name!> LOADACS.txt
 		ECHO Library %%G compiled.
 	) ELSE (
 		ECHO No scripts found in %%G.
