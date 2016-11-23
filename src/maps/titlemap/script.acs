@@ -1,45 +1,51 @@
 #include "zcommon.acs"
 
-#define TAGLINE_AMOUNT	35
+#define TAGLINE_NORM	4
+#define TAGLINE_AMOUNT	13
 
-str tagline[TAGLINE_AMOUNT] =
+str tagline[TAGLINE_NORM] = // regular taglines
 {
-	"",
 	"New games. Timeless classics.",
-	"",
 	"New classics. Timeless games.",
-	"",
 	"Timeless games. New classics.",
-	"",
 	"Timeless classics. New games.",
-	"",
-	"Frog blast the vent core!",
-	"",
-	"A blast to the past!",
-	"",
-	"We're failing school for this!",
-	"",
-	"IDDQD!",
-	"",
-	"Ereh saw oremor!",
-	"",
-	"Almost crash free!",
-	"",
-	"We aren't rich!",
-	"",
-	"We use a 486!",
-	"",
-	"Made right under the nose of Bran Bran!",
-	"",
-	"Now Adlib Compatible!",
-	"",
-	"Lamb brains are gross!",
-	"",
-	"Where are corridors one through seven?",
-	"",
-	"It's a real company, we promise!",
-	"",
 };
+
+// acc seems to have a character limit for arrays
+str tagline2[TAGLINE_AMOUNT] = // silly taglines
+{
+	"Frog blast the vent core!",
+	"A blast to the past!",
+	"We're failing school for this!",
+	"IDDQD!",
+	"Ereh saw oremor!",
+	"Almost crash free!",
+	"We aren't rich!",
+	"We use a 486!",
+	"Made right under the nose of Bran Bran!",
+	"Now Adlib Compatible!",
+	"Lamb brains are gross!",
+	"Where are corridors one through seven?",
+	"It's a real company, we promise!",
+};
+
+function void show_tagline(void)
+{
+	str tag_output = "";
+	
+	if(Random(0,1)) // 50% chance of tagline
+	{
+		if(Random(0,3)) // 75% chance of regular tagline
+		{
+			tag_output = tagline[Random(0, TAGLINE_NORM - 1)];
+		} else { // silly tagline
+			tag_output = tagline2[Random(0, TAGLINE_AMOUNT - 1)];
+		}
+	}
+	
+	SetFont("FONTA");
+	HudMessage(s:tag_output; HUDMSG_FADEINOUT, 0, CR_WHITE, 320.0, 440.0, 3.0, 1.0, 1.0);
+}
 
 script 1 OPEN
 {
@@ -53,8 +59,9 @@ script 1 OPEN
 	SetFont("LOGO1");
 	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 320.0, 240.0, 5.0, 2.0, 1.0);
 	Delay (35*3);
-	SetFont("FONTA");
-	HudMessage(s:tagline[Random(0, TAGLINE_AMOUNT - 1)]; HUDMSG_FADEINOUT, 0, CR_WHITE, 320.0, 440.0, 3.0, 1.0, 1.0);
+	
+	show_tagline();
+	
 	Delay (35*6);
 	SetMusic("");
 	Delay (35*2);
