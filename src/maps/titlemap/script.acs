@@ -8,7 +8,7 @@ function int abs(int n);
 function void show_tagline(void);
 
 
-script 1 OPEN
+script "titlemap" OPEN
 {
 	ClearInventory();
 	SetMusic("MIDRESET");
@@ -29,27 +29,6 @@ script 1 OPEN
 	ACS_NamedExecute("cutscene", 0);
 	Delay (300);
 	ACS_NamedExecute("print_msg", 0);
-}
-
-str msg[7] =
-{
-	"NETWORK CONNECTION TO $COMM/GUEST/SIGOURNEY ESTABLISHING...",
-	"NETWORK CONNECTION TO $COMM/GUEST/SIGOURNEY ESTABLISHED.",
-	"DOCKING CONNECTION TO $DA8/SIGOURNEY ESTABLISHING...",
-	"DOCKING CONNECTION TO $DA8/SIGOURNEY ESTABLISHED.",
-	"ENGAGING DOCKING PROCEDURE: STANDARD DOCKING PROTOCOLS...",
-	"INCOMING GREETER FROM */GUEST SIGOURNEY...",
-	"WELCOME TO THE SIGOURNEY, PLEASE WAIT FOR DIRECTIONS!"
-};
-
-script "print_msg" (void)
-{
-		for (int i = 0; i < 7; ++i)
-		{
-			SetFont("SMALLFONT");
-			HudMessage(s:msg[i]; HUDMSG_TYPEON, 0, CR_DARKGREEN, 0.5, -0.75, 1.0, 0.1, 2.5);
-			Delay(300);
-		}
 }
 
 script "cutscene" (void)
@@ -110,6 +89,21 @@ script "cutscene" (void)
 	Delay(300);
 	SetFont("CUT1F1");
 	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 2.0, 1.0);
+}
+
+script "print_msg" (void)
+{
+		int msg_amount = atoi(StrParam(l:"XENOTOMB_TTLMSG_AMOUNT"));
+		
+		for (int i = 0; i < msg_amount; ++i)
+		{
+			SetFont("SMALLFONT");
+			
+			str msg = StrParam(s:"XENOTOMB_TTLMSG", i:i);
+			HudMessage(l:msg; HUDMSG_TYPEON, 0, CR_DARKGREEN, 0.5, -0.75, 1.0, 0.1, 2.5);
+			
+			Delay(300);
+		}
 }
 
 function void show_tagline(void)
