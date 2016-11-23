@@ -1,47 +1,14 @@
 #include "zcommon.acs"
 
-#define TAGLINE_AMOUNT	35
+function int atoi(str);
+function bool strcmpz(str, str);
+function int pow(int n, int e);
+function int abs(int n);
 
-str tagline[TAGLINE_AMOUNT] =
-{
-	"",
-	"New games. Timeless classics.",
-	"",
-	"New classics. Timeless games.",
-	"",
-	"Timeless games. New classics.",
-	"",
-	"Timeless classics. New games.",
-	"",
-	"Frog blast the vent core!",
-	"",
-	"A blast to the past!",
-	"",
-	"We're failing school for this!",
-	"",
-	"IDDQD!",
-	"",
-	"Ereh saw oremor!",
-	"",
-	"Almost crash free!",
-	"",
-	"We aren't rich!",
-	"",
-	"We use a 486!",
-	"",
-	"Made right under the nose of Bran Bran!",
-	"",
-	"Now Adlib Compatible!",
-	"",
-	"Lamb brains are gross!",
-	"",
-	"Where are corridors one through seven?",
-	"",
-	"It's a real company, we promise!",
-	"",
-};
+function void show_tagline(void);
 
-script 1 OPEN
+
+script "titlemap" OPEN
 {
 	ClearInventory();
 	SetMusic("MIDRESET");
@@ -53,35 +20,15 @@ script 1 OPEN
 	SetFont("LOGO1");
 	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 320.0, 240.0, 5.0, 2.0, 1.0);
 	Delay (35*3);
-	SetFont("FONTA");
-	HudMessage(s:tagline[Random(0, TAGLINE_AMOUNT - 1)]; HUDMSG_FADEINOUT, 0, CR_WHITE, 320.0, 440.0, 3.0, 1.0, 1.0);
+	
+	show_tagline();
+	
 	Delay (35*6);
 	SetMusic("");
 	Delay (35*2);
 	ACS_NamedExecute("cutscene", 0);
 	Delay (300);
 	ACS_NamedExecute("print_msg", 0);
-}
-
-str msg[7] =
-{
-	"NETWORK CONNECTION TO $COMM/GUEST/SIGOURNEY ESTABLISHING...",
-	"NETWORK CONNECTION TO $COMM/GUEST/SIGOURNEY ESTABLISHED.",
-	"DOCKING CONNECTION TO $DA8/SIGOURNEY ESTABLISHING...",
-	"DOCKING CONNECTION TO $DA8/SIGOURNEY ESTABLISHED.",
-	"ENGAGING DOCKING PROCEDURE: STANDARD DOCKING PROTOCOLS...",
-	"INCOMING GREETER FROM */GUEST SIGOURNEY...",
-	"WELCOME TO THE SIGOURNEY, PLEASE WAIT FOR DIRECTIONS!"
-};
-
-script "print_msg" (void)
-{
-		for (int i = 0; i < 7; ++i)
-		{
-			SetFont("SMALLFONT");
-			HudMessage(s:msg[i]; HUDMSG_TYPEON, 0, CR_DARKGREEN, 0.5, -0.75, 1.0, 0.1, 2.5);
-			Delay(300);
-		}
 }
 
 script "cutscene" (void)
@@ -143,3 +90,88 @@ script "cutscene" (void)
 	SetFont("CUT1F1");
 	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 2.0, 1.0);
 }
+
+script "print_msg" (void)
+{
+		int msg_amount = atoi(StrParam(l:"XENOTOMB_TTLMSG_AMOUNT"));
+		
+		for (int i = 0; i < msg_amount; ++i)
+		{
+			SetFont("SMALLFONT");
+			
+			str msg = StrParam(s:"XENOTOMB_TTLMSG", i:i);
+			HudMessage(l:msg; HUDMSG_TYPEON, 0, CR_DARKGREEN, 0.5, -0.75, 1.0, 0.1, 2.5);
+			
+			Delay(300);
+		}
+}
+
+function void show_tagline(void)
+{
+	str tagline = "XENOTOMB_SLOGAN_DEFAULT";
+	
+	if(Random(0,1)) // 50% chance of tagline
+	{
+		int tagline_amount;
+		
+		if(Random(0,3)) // 75% chance of regular tagline
+		{
+			tagline_amount = atoi(StrParam(l:"XENOTOMB_SLOGAN_AMOUNT"));
+			
+			tagline = StrParam(s:"XENOTOMB_SLOGAN", i:Random(0, tagline_amount - 1));
+		} else { // silly tagline
+			tagline_amount = atoi(StrParam(l:"XENOTOMB_TAGLINE_AMOUNT"));
+			
+			tagline = StrParam(s:"XENOTOMB_TAGLINE", i:Random(0, tagline_amount - 1));
+		}
+	}
+	
+	SetFont("FONTA");
+	HudMessage(l:tagline; HUDMSG_FADEINOUT, 0, CR_WHITE, 320.0, 440.0, 3.0, 1.0, 1.0);
+}
+
+// by "The Zombie Killer"
+// http://forum.zdoom.org/viewtopic.php?p=803718#p803718
+function int atoi(str s)
+{
+   str a = "";
+   int i, i2, n;
+   int l = StrLen(s);
+   for (i = 0; i < l; i++)
+   {
+      for (i2 = 0; i2 < 10; i2++)
+      {
+         a = StrParam(i:i2);
+         if (!strcmpz(StrParam(c:GetChar(s, i)), a))
+            n += i2 * pow(10, l - i - 1);
+      }
+   }
+   return n;
+}
+
+function bool strcmpz(str s1, str s2)
+{
+   int c1 = GetChar(s1, 0);
+   int c2 = GetChar(s2, 0);
+   if (c1 == c2)
+      return false;
+   return true;
+}
+
+function int pow(int n, int e)
+{
+   int t = 1;
+   for (int i = 0; i < abs(e); i++)
+      t *= n;
+   if (e < 0)
+      t = 1 / t;
+   return t;
+}
+
+function int abs(int n)
+{
+   if (n < 0)
+      return -n;
+   return n;
+}
+// "The Zombie Killer"

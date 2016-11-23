@@ -13,7 +13,7 @@ script "Cutscene" ENTER //Map start cutscene
 	SetMusic ("X_LOADIN");
 	SetHudSize (640,480,0);
 	SetFont ("FONTA");
-	HudMessage (s:"DOCK CONNECTION ESTABLISHED..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_GREEN, 320.0, 200.0, 3.0, 0.02, 1.0);
+	HudMessage (l:"XENOTOMB_A10_DOCK"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_GREEN, 320.0, 200.0, 3.0, 0.02, 1.0);
     Delay (35 * 5);
 	SetFont("CUTA10A1");
 	HudMessage (s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
@@ -65,10 +65,10 @@ script "Info" (void) //Map start cutscene
 	ChangeCamera (4,0,0);
 	SetHudSize (640,480,false);
 	SetFont ("FONTA");
-	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cfInitializing..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
+	HudMessage (l:"XENOTOMB_A10_HUDINIT"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
     Delay (35 * 5);
 	PlaySound (0, "Computer/Alert2");
-	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cnInitialized..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
+	HudMessage (l:"XENOTOMB_A10_HUDINIT2"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
     Delay (35 * 6);
     FadeTo (0, 0, 0, 0.0, 2.0);
     Delay (35 * 1);
@@ -88,7 +88,7 @@ script "Info" (void) //Map start cutscene
 //{
 	//while (TRUE)
 	//{
-	//HudMessage (s:"Press 'USE' to skip story sequences"; HUDMSG_PLAIN, 0, CR_WHITE, 0, 0, 0.9, 0.1, 1.0);
+	//HudMessage (l:"XENOTOMB_SKIP_CUTSCENE"; HUDMSG_PLAIN, 0, CR_WHITE, 0, 0, 0.9, 0.1, 1.0);
 	//Delay (30);
 	//}
 //}
@@ -114,14 +114,14 @@ script "Intro Airlock" (void) //Opening airlock door
 	Thing_Deactivate (1);
 	SetHudSize (640,480,false);
 	PlaySound (0, "Computer/Alert");
-	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+	HudMessage (l:"XENOTOMB_A10_GRAVITY"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
     Delay (35 * 1);
 	SetThingSpecial (2,0,0,255,0);
 	SetThingSpecial (3,0,255,100,0);
 	SetAirControl (0.001);
 	SetGravity (150.0);
 	SetPlayerProperty (0, 0.5, "Player.ForwardMove");
-	gravitytext = "LOW GRAVITY";
+	gravitytext = "XENOTOMB_A10_LOWGRAV";
 	Pillar_Open	(1,6,64,64);
 	Delay (35 * 5);
 	Pillar_Open (1,6,-64,-64);
@@ -131,7 +131,7 @@ script "Gravity Text" ENTER //Gravity indicator
 {
 	while(TRUE)
 	{
-	HudMessage (s:gravitytext; HUDMSG_PLAIN, 0, CR_YELLOW, 0, 1, 0.9, 0.1, 1.0);
+	HudMessage (l:gravitytext; HUDMSG_PLAIN, 0, CR_YELLOW, 0, 1, 0.9, 0.1, 1.0);
 	Delay (30);
 	}
 }
@@ -147,7 +147,7 @@ script "Exit Script" (void) //Exiting script
 	Delay(35*2);
 	SetHudSize (640,480,false);
 	SetFont ("FONTA");
-	HudMessage (s:"INCOMING MESSAGE FROM \caAVALON PATROL"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
+	HudMessage (l:"XENOTOMB_A10_INCOMING"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
 	Delay(35*4);
 	Exit_Normal(0);
 }
@@ -159,12 +159,12 @@ script "Exit Airlock" (void) //Opening airlock door
     Delay (35 * 5);
 	Thing_Deactivate (1);
 	SetHudSize (640,480,false);
-	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+	HudMessage (l:"XENOTOMB_A10_GRAVITY"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
     Delay (35 * 1);
 	SetThingSpecial (7,0,0,255,0);
 	SetAirControl (0.001);
 	SetGravity (150.0);
-	gravitytext = "LOW GRAVITY";
+	gravitytext = "XENOTOMB_A10_LOWGRAV";
 	Pillar_Open	(8,6,64,64);
 	Delay (35 * 5);
 	Pillar_Open (8,6,-64,-64);
