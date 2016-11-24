@@ -16,44 +16,50 @@ Resolution 640,480;
 
 statusbar fullscreen, forcescaled, fullscreenoffsets
 {
-	//Life Display
-	drawimage "STLIFEBG", 0, -32; //Background
-	drawimage "STLIFED1", 0,-32;
-	drawnumber 3, FONT1, RED, health, -1,-1;
-	IfHealth 101 %
+	InInventory not CutsceneMode
 	{
-	drawnumber 3, FONT1, CYAN, health, -0,-32;
+		//Life Display
+		drawimage "STLIFEBG", 0, -32; //Background
+		drawimage "STLIFED1", 0,-32;
+		drawnumber 3, FONT1, RED, health, -1,-1;
+		IfHealth 101 %
+		{
+			drawnumber 3, FONT1, CYAN, health, -0,-32;
+		}
+		else
+		IfHealth 76 %
+		{
+			drawimage "STLIFEA1", 0,-32;
+			drawnumber 3, FONT1, GREEN, health, -0,-32;
+		}
+		else
+		IfHealth 51 %
+		{
+			drawimage "STLIFEB1", 0,-32;
+			drawnumber 3, FONT1, YELLOW, health, -0,-32;
+		}
+		else
+		IfHealth 26 %
+		{
+			drawimage "STLIFEC1", 0,-32;
+			drawnumber 3, FONT1, ORANGE, health, 2,-32;
+		}
+		//Shield Display
+		drawimage "STARMRBG", 0,-64; //Background
+		drawbar "STARMRFA", "STARMRFT", armor(100), horizontal, interpolate(4), -64,-64;
+		drawbar "STARM2FA", "STARM2FT", armor(200), horizontal, interpolate(4), 0,-64;
+		drawnumber 3, FONT1, GREEN, armor, -64,64;
 	}
-	else
-	IfHealth 76 %
-	{
-	drawimage "STLIFEA1", 0,-32;
-	drawnumber 3, FONT1, GREEN, health, -0,-32;
-	}
-	else
-	IfHealth 51 %
-	{
-	drawimage "STLIFEB1", 0,-32;
-	drawnumber 3, FONT1, YELLOW, health, -0,-32;
-	}
-	else
-	IfHealth 26 %
-	{
-	drawimage "STLIFEC1", 0,-32;
-	drawnumber 3, FONT1, ORANGE, health, 2,-32;
-	}
-	//Shield Display
-	drawimage "STARMRBG", 0,-64; //Background
-	drawbar "STARMRFA", "STARMRFT", armor(100), horizontal, interpolate(4), -64,-64;
-	drawbar "STARM2FA", "STARM2FT", armor(200), horizontal, interpolate(4), 0,-64;
-	drawnumber 3, FONT1, GREEN, armor, -64,64;
 }
 
 
 statusbar normal // Standard Doom Status bar
 {
-	alpha 1.0
-	drawimage "STBARBIG", 0, 0;
+	InInventory not CutsceneMode
+	{
+		alpha 1.0
+		drawimage "STBARBIG", 0, 0;
+	}
 }
 /*
 statusbar normal, fullscreenoffsets

@@ -6,6 +6,9 @@ function void show_tagline(void);
 script "titlemap" OPEN
 {
 	ClearInventory();
+	
+	GiveInventory("CutsceneMode", 1); // hide STBAR
+	
 	SetMusic("MIDRESET");
 	Delay(8);
 	
