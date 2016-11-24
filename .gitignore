@@ -20,7 +20,7 @@ acs/
 ir/
 
 # compiled maps - map sources go in \src\maps
-maps/
+/maps/
 
 # this is automatically generated on compilation
 LOADACS.txt
