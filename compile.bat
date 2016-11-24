@@ -93,8 +93,10 @@ FOR /D %%G IN (src\lib\*) DO (
 		ECHO Linking scripts...
 		..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_lib_directory!\*.obj acs\!_lib_name!.lib
 		
-		ECHO !_lib_name!> LOADACS.txt
-		ECHO Library '!_lib_name!' compiled.
+		IF EXIST !_lib_path!\.LOADACS (
+			ECHO !_lib_name!> LOADACS.txt
+			ECHO Library '!_lib_name!' compiled.
+		)
 	) ELSE (
 		ECHO No scripts found in %%G.
 	)
