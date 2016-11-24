@@ -74,16 +74,20 @@ FOR /D %%G IN (src\lib\*) DO (
 		
 		IF NOT EXIST ir\!_lib_directory! MKDIR ir\!_lib_directory!
 		IF NOT EXIST acs\ MKDIR acs\
-	
+		
 		rem compile all acs scripts
 		IF EXIST %%G\*.acs (
 			ECHO Compiling ACS scripts...
 			..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom -c !_lib_path!\*.acs ir\!_lib_directory!\acs.obj
 		)
 		
+		SET "_link_libc="
+		
 		rem compile all c scripts
 		IF EXIST %%G\*.c (
 			CALL :BUILD_LIBC
+			
+			SET _link_libc="-llibc"
 			
 			ECHO Compiling C scripts...
 			..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom -c !_lib_path!\*.c ir\!_lib_directory!\c.obj
@@ -91,7 +95,7 @@ FOR /D %%G IN (src\lib\*) DO (
 		
 		rem link scripts into BEHAVIOR file
 		ECHO Linking scripts...
-		..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_lib_directory!\*.obj acs\!_lib_name!.lib
+		..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay !_link_libc! ir\!_lib_directory!\*.obj acs\!_lib_name!.lib
 		
 		IF EXIST !_lib_path!\.LOADACS (
 			ECHO !_lib_name!> LOADACS.txt
@@ -156,11 +160,15 @@ FOR /D %%G IN (src\maps\*) DO (
 				..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom -c !_wad_path!\*.acs ir\!_wad_directory!\acs.obj
 			)
 			
+			SET "_link_libc="
+			
 			rem compile all c scripts
 			IF EXIST %%G\*.c (
 				IF NOT EXIST acs\ MKDIR acs\
 			
 				CALL :BUILD_LIBC
+				
+				SET _link_libc="-llibc"
 				
 				ECHO Compiling C scripts...
 				..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom -c !_wad_path!\*.c ir\!_wad_directory!\c.obj
@@ -168,7 +176,7 @@ FOR /D %%G IN (src\maps\*) DO (
 			
 			rem link scripts into BEHAVIOR file
 			ECHO Linking scripts...
-			..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay -llibc ir\!_wad_directory!\*.obj ir\!_wad_directory!\behavior.lib
+			..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay !_link_libc! ir\!_wad_directory!\*.obj ir\!_wad_directory!\behavior.lib
 			
 			rem pack everything into wad file in \maps
 			
