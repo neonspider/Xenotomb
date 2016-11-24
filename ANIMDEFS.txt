@@ -88,3 +88,5 @@ pic LOGO28 tics 2
 pic LOGO29 tics 1
 pic LOGO30 tics 1
 pic LOGO1 tics 210
+
+cameratexture D3GUITEX 256 144 fit 64 36 // GUI texture

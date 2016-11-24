@@ -1,0 +1,13 @@
+actor CursorPositionPuff : BulletPuff
+{
+	RENDERSTYLE	None
+	Radius	0
+	Height	0
+	VSpeed	0
+	-RANDOMIZE
+}
+
+actor ZeroHeightMapSpot : MapSpot 4444
+{
+	Height	0
+}

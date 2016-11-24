@@ -4,6 +4,8 @@
 
 #include "src/lib/acsutils/decorate/changeflag.txt"
 
+#include "src/maps/gui_test/decorate.txt"
+
 Actor MyPlayer : DoomPlayer // Change Player Speed
 {
     Player.ForwardMove 0.7
