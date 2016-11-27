@@ -1,6 +1,9 @@
 @ECHO off
 SETLOCAL ENABLEDELAYEDEXPANSION
 
+rem change to working directory
+CD /D %~dp0
+
 rem ************* TODO - LIBRARY COMPILATION ******************
 rem
 rem go through \src\lib and compile each library into \ir\lib
