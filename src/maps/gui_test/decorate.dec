@@ -1,4 +1,4 @@
-actor Cursor : MapSpot	// from zk-chase.pk3
+actor GuiCursor : MapSpot	// from zk-chase.pk3
 {
 	+NODECAL
 	+NOTIMEFREEZE
