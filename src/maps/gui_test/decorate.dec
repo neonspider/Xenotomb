@@ -1,13 +1,17 @@
-actor CursorPositionPuff : BulletPuff
+actor Cursor : MapSpot	// from zk-chase.pk3
 {
-	RENDERSTYLE	None
-	Radius	0
-	Height	0
-	VSpeed	0
-	-RANDOMIZE
+	+NODECAL
+	+NOTIMEFREEZE
+	+BLOODLESSIMPACT
+	+ALWAYSPUFF
+	+PUFFONACTORS
+	+SKYEXPLODE
+	+ALLOWTHRUFLAGS
+	+THRUACTORS
+	+THRUSPECIES
 }
 
-actor ZeroHeightMapSpot : MapSpot 4444
+actor GuiMarker : MapSpot 4444
 {
 	Height	0
 }
