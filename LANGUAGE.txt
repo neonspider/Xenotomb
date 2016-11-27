@@ -1,0 +1,60 @@
+[enu default]
+
+OPTMNU_TITLE			= "Xenotomb Setup Program 1.0";
+OPTMNU_CONTROLS			= "Key Configuration";
+OPTMNU_MOUSE			= "Mouse Configuration";
+OPTMNU_JOYSTICK			= "Additional Input Devices";
+OPTMNU_PLAYER			= "Player Setup";
+OPTMNU_GAMEPLAY			= "Gameplay Options";
+OPTMNU_COMPATIBILITY	= "Compatibility Options";
+OPTMNU_AUTOMAP			= "Automap Options";
+OPTMNU_HUD				= "HUD Options";
+OPTMNU_MISCELLANEOUS	= "Miscellaneous Options";
+OPTMNU_NETWORK			= "Network Options";
+OPTMNU_SOUND			= "Sound Options";
+OPTMNU_DISPLAY			= "Graphics Options";
+OPTMNU_VIDEO			= "Video Options";
+OPTMNU_DEFAULTS			= "Reset to defaults";
+OPTMNU_RESETTOSAVED		= "Reset to last saved";
+OPTMNU_CONSOLE			= "Console";
+
+XENOTOMB_SLOGAN_DEFAULT	= "";
+
+XENOTOMB_SLOGAN_AMOUNT	= "4"; // serious taglines
+XENOTOMB_SLOGAN0		= "New games. Timeless classics.";
+XENOTOMB_SLOGAN1		= "New classics. Timeless games.";
+XENOTOMB_SLOGAN2		= "Timeless games. New classics.";
+XENOTOMB_SLOGAN3		= "Timeless classics. New games.";
+
+XENOTOMB_TAGLINE_AMOUNT	= "13"; // silly taglines
+XENOTOMB_TAGLINE0		= "Frog blast the vent core!";
+XENOTOMB_TAGLINE1		= "A blast to the past!";
+XENOTOMB_TAGLINE2		= "We're failing school for this!";
+XENOTOMB_TAGLINE3		= "IDDQD!";
+XENOTOMB_TAGLINE4		= "Ereh saw oremor!";
+XENOTOMB_TAGLINE5		= "Almost crash free!";
+XENOTOMB_TAGLINE6		= "We aren't rich!";
+XENOTOMB_TAGLINE7		= "We use a 486!";
+XENOTOMB_TAGLINE8		= "Made right under the nose of Bran Bran!";
+XENOTOMB_TAGLINE9		= "Now Adlib Compatible!";
+XENOTOMB_TAGLINE10		= "Lamb brains are gross!";
+XENOTOMB_TAGLINE11		= "Where are corridors one through seven?";
+XENOTOMB_TAGLINE12		= "It's a real company, we promise!";
+
+XENOTOMB_TTLMSG_AMOUNT	= "7";
+XENOTOMB_TTLMSG0		= "NETWORK CONNECTION TO $COMM/GUEST/SIGOURNEY ESTABLISHING...";
+XENOTOMB_TTLMSG1		= "NETWORK CONNECTION TO $COMM/GUEST/SIGOURNEY ESTABLISHED.";
+XENOTOMB_TTLMSG2		= "DOCKING CONNECTION TO $DA8/SIGOURNEY ESTABLISHING...";
+XENOTOMB_TTLMSG3		= "DOCKING CONNECTION TO $DA8/SIGOURNEY ESTABLISHED.";
+XENOTOMB_TTLMSG4		= "ENGAGING DOCKING PROCEDURE: STANDARD DOCKING PROTOCOLS...";
+XENOTOMB_TTLMSG5		= "INCOMING GREETER FROM */GUEST SIGOURNEY...";
+XENOTOMB_TTLMSG6		= "WELCOME TO THE SIGOURNEY, PLEASE WAIT FOR DIRECTIONS!";
+
+XENOTOMB_SKIP_CUTSCENE	= "Press 'USE' to skip story sequences";
+
+XENOTOMB_A10_DOCK		= "DOCK CONNECTION ESTABLISHED...";
+XENOTOMB_A10_HUDINIT	= "AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cfInitializing...";
+XENOTOMB_A10_HUDINIT2	= "AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cnInitialized...";
+XENOTOMB_A10_GRAVITY	= "DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED";
+XENOTOMB_A10_LOWGRAV	= "LOW GRAVITY";
+XENOTOMB_A10_INCOMING	= "INCOMING MESSAGE FROM \caAVALON PATROL";

@@ -1,145 +1,150 @@
+#import "../../lib/acsutils/acsutils.acs"
 #include "zcommon.acs"
 
-#define TAGLINE_AMOUNT	35
+function void show_tagline(void);
 
-str tagline[TAGLINE_AMOUNT] =
-{
-	"",
-	"New games. Timeless classics.",
-	"",
-	"New classics. Timeless games.",
-	"",
-	"Timeless games. New classics.",
-	"",
-	"Timeless classics. New games.",
-	"",
-	"Frog blast the vent core!",
-	"",
-	"A blast to the past!",
-	"",
-	"We're failing school for this!",
-	"",
-	"IDDQD!",
-	"",
-	"Ereh saw oremor!",
-	"",
-	"Almost crash free!",
-	"",
-	"We aren't rich!",
-	"",
-	"We use a 486!",
-	"",
-	"Made right under the nose of Bran Bran!",
-	"",
-	"Now Adlib Compatible!",
-	"",
-	"Lamb brains are gross!",
-	"",
-	"Where are corridors one through seven?",
-	"",
-	"It's a real company, we promise!",
-	"",
-};
-
-script 1 OPEN
+script "titlemap" OPEN
 {
 	ClearInventory();
+	
+	GiveInventory("CutsceneMode", 1); // hide STBAR
+	
 	SetMusic("MIDRESET");
-	Delay (8);
+	Delay(8);
+	
 	SetMusic("FANFARE");
-	SetHudSize(640,480,0);
+	SetHudSize(640, 480, 0);
 	SetFont("STAR1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT,10,CR_UNTRANSLATED, 320.0, 240.0, 5.0, 2.0, 1.0);
+	HudMessage(s:"A"; HUDMSG_FADEINOUT, 10, CR_UNTRANSLATED, 320.0, 240.0, 5.0, 2.0, 1.0);
 	SetFont("LOGO1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 320.0, 240.0, 5.0, 2.0, 1.0);
-	Delay (35*3);
-	SetFont("FONTA");
-	HudMessage(s:tagline[Random(0, TAGLINE_AMOUNT - 1)]; HUDMSG_FADEINOUT, 0, CR_WHITE, 320.0, 440.0, 3.0, 1.0, 1.0);
-	Delay (35*6);
+	HudMessage(s:"A"; HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 320.0, 240.0, 5.0, 2.0, 1.0);
+	Delay(35 * 3);
+	
+	show_tagline();
+	
+	Delay(35 * 6);
+	
 	SetMusic("");
-	Delay (35*2);
+	Delay(35 * 2);
+	
 	ACS_NamedExecute("cutscene", 0);
-	Delay (300);
+	Delay(300);
+	
 	ACS_NamedExecute("print_msg", 0);
-}
-
-str msg[7] =
-{
-	"NETWORK CONNECTION TO $COMM/GUEST/SIGOURNEY ESTABLISHING...",
-	"NETWORK CONNECTION TO $COMM/GUEST/SIGOURNEY ESTABLISHED.",
-	"DOCKING CONNECTION TO $DA8/SIGOURNEY ESTABLISHING...",
-	"DOCKING CONNECTION TO $DA8/SIGOURNEY ESTABLISHED.",
-	"ENGAGING DOCKING PROCEDURE: STANDARD DOCKING PROTOCOLS...",
-	"INCOMING GREETER FROM */GUEST SIGOURNEY...",
-	"WELCOME TO THE SIGOURNEY, PLEASE WAIT FOR DIRECTIONS!"
-};
-
-script "print_msg" (void)
-{
-		for (int i = 0; i < 7; ++i)
-		{
-			SetFont("SMALLFONT");
-			HudMessage(s:msg[i]; HUDMSG_TYPEON, 0, CR_DARKGREEN, 0.5, -0.75, 1.0, 0.1, 2.5);
-			Delay(300);
-		}
 }
 
 script "cutscene" (void)
 {
 	SetMusic("X_TITLEM");
-	SetHudSize(320,240,0);
+	SetHudSize(320, 240, 0);
 	SetFont("ADVISOR");
-	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
+	HudMessage(s:"A"; HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
 	Delay(300);
-	SetHudSize(640,480,0);
+	
+	SetHudSize(640, 480, 0);
 	SetFont("CUT1A1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
+	HudMessage(s:"A"; HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
 	Delay(300);
+	
 	SetFont("CUT1B1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 1.0);
+	HudMessage(s:"A"; HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 1.0);
 	Delay(10);
+	
 	SetFont("CUT1B2");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(10);
+	
 	SetFont("CUT1B3");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(10);
+	
 	SetFont("CUT1B4");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(10);
+	
 	SetFont("CUT1B5");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(10);
+	
 	SetFont("CUT1B6");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(12);
+	
 	SetFont("CUT1B7");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(10);
+	
 	SetFont("CUT1B8");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(10);
+	
 	SetFont("CUT1B9");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(12);
+	
 	SetFont("CUT1B10");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(14);
+	
 	SetFont("CUT1B11");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 0.0);
 	Delay(50);
+	
 	SetFont("CUT1B12");
-	HudMessage(s:"A";HUDMSG_FADEOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0);
+	HudMessage(s:"A"; HUDMSG_FADEOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0);
 	Delay(200);
+	
 	SetFont("CUT1C1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
+	HudMessage(s:"A"; HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
 	Delay(300);
+	
 	SetFont("CUT1D1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
+	HudMessage(s:"A"; HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
 	Delay(300);
+	
 	SetFont("CUT1E1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT,9,CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
+	HudMessage(s:"A"; HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 5.0, 2.0, 1.0);
 	Delay(300);
+	
 	SetFont("CUT1F1");
-	HudMessage(s:"A";HUDMSG_PLAIN,9,CR_UNTRANSLATED, 0.5, 0.5, 0, 2.0, 1.0);
+	HudMessage(s:"A"; HUDMSG_PLAIN, 9, CR_UNTRANSLATED, 0.5, 0.5, 0, 2.0, 1.0);
+}
+
+script "print_msg" (void)
+{
+		int msg_amount = atoi(lang("XENOTOMB_TTLMSG_AMOUNT"));
+		
+		for(int i = 0; i < msg_amount; ++i)
+		{
+			SetFont("SMALLFONT");
+			
+			str msg = StrParam(s:"XENOTOMB_TTLMSG", i:i);
+			HudMessage(l:msg; HUDMSG_TYPEON, 0, CR_DARKGREEN, 0.5, -0.75, 1.0, 0.1, 2.5);
+			
+			Delay(300);
+		}
+}
+
+function void show_tagline(void)
+{
+	str tagline = "XENOTOMB_SLOGAN_DEFAULT";
+	
+	if(Random(0,1)) // 50% chance of tagline
+	{
+		int tagline_amount;
+		
+		if(Random(0,3)) // 75% chance of regular tagline
+		{
+			tagline_amount = atoi(lang("XENOTOMB_SLOGAN_AMOUNT"));
+			
+			tagline = StrParam(s:"XENOTOMB_SLOGAN", i:Random(0, tagline_amount - 1));
+		} else { // silly tagline
+			tagline_amount = atoi(lang("XENOTOMB_TAGLINE_AMOUNT"));
+			
+			tagline = StrParam(s:"XENOTOMB_TAGLINE", i:Random(0, tagline_amount - 1));
+		}
+	}
+	
+	SetFont("FONTA");
+	HudMessage(l:tagline; HUDMSG_FADEINOUT, 0, CR_WHITE, 320.0, 440.0, 3.0, 1.0, 1.0);
 }
