@@ -1,6 +1,9 @@
 @ECHO off
 SETLOCAL ENABLEDELAYEDEXPANSION
 
+rem change to working directory
+CD /D %~dp0
+
 rem ************* TODO - LIBRARY COMPILATION ******************
 rem
 rem go through \src\lib and compile each library into \ir\lib
@@ -99,8 +102,9 @@ FOR /D %%G IN (src\lib\*) DO (
 		
 		IF EXIST !_lib_path!\.LOADACS (
 			ECHO !_lib_name!> LOADACS.txt
-			ECHO Library '!_lib_name!' compiled.
 		)
+		
+		ECHO Library '!_lib_name!' compiled.
 	) ELSE (
 		ECHO No scripts found in %%G.
 	)
