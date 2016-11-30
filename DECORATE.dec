@@ -4,7 +4,7 @@
 
 #include "src/lib/acsutils/decorate/changeflag.txt"
 
-#include "src/maps/gui_test/decorate.txt"
+#include "src/maps/gui_test/decorate.dec"
 
 Actor MyPlayer : DoomPlayer // Change Player Speed
 {

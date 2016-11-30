@@ -1,17 +1,24 @@
-actor GuiCursor : MapSpot	// from zk-chase.pk3
+actor GuiCursor : BulletPuff	// from zk-chase.pk3
 {
-	+NODECAL
-	+NOTIMEFREEZE
-	+BLOODLESSIMPACT
-	+ALWAYSPUFF
-	+PUFFONACTORS
-	+SKYEXPLODE
+	VSpeed	0	// stops it moving upwards
+	
 	+ALLOWTHRUFLAGS
 	+THRUACTORS
-	+THRUSPECIES
+	
+	+ACTIVATEIMPACT
+	
+	Radius	0
+	Height	0
+}
+
+actor GuiShooter : MapSpot
+{
+	Radius	0
+	Height	0
 }
 
 actor GuiMarker : MapSpot 4444
 {
+	Radius	0
 	Height	0
 }
