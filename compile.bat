@@ -40,6 +40,13 @@ rem uses only newest .wad  in each directory
 rem
 rem **********************************
 
+IF NOT EXIST ..\GDCC\ (
+	ECHO GDCC must be in a directory adjacent
+	ECHO to this script for compilation to work!
+	
+	EXIT /B
+)
+
 rem delete all binaries and maps
 ECHO(
 ECHO Clearing intermediary compilation files...
@@ -78,10 +85,20 @@ FOR /D %%G IN (src\lib\*) DO (
 		IF NOT EXIST ir\!_lib_directory! MKDIR ir\!_lib_directory!
 		IF NOT EXIST acs\ MKDIR acs\
 		
+		SET "_link_param="
+		IF EXIST !_lib_path!\AUTOLOAD.txt (
+			FOR /F %%I IN (!_lib_path!\AUTOLOAD.txt) DO (
+				ECHO Autoloading library %%I.
+				SET _link_param=!_link_param! -l%%I
+			)
+		)
+		
+		SET "_link_libc="
+		
 		rem compile all acs scripts
 		IF EXIST %%G\*.acs (
 			ECHO Compiling ACS scripts...
-			..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom -c !_lib_path!\*.acs ir\!_lib_directory!\acs.obj
+			..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom !_link_param! -c !_lib_path!\*.acs ir\!_lib_directory!\acs.obj
 		)
 		
 		SET "_link_libc="
@@ -92,13 +109,19 @@ FOR /D %%G IN (src\lib\*) DO (
 			
 			SET _link_libc="-llibc"
 			
+			rem PREPROCESS
+			ECHO Preprocessing C scripts...
+			FOR %%I IN (!_lib_path!\*.c) DO (
+				..\GDCC\gdcc-cpp.exe --define XENOTOMB_DEBUG --warn-all --bc-target=ZDoom %%I ir\!_lib_directory!\%%~nxI
+			)
+			
 			ECHO Compiling C scripts...
-			..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom -c !_lib_path!\*.c ir\!_lib_directory!\c.obj
+			..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom !_link_libc! !_link_param! -c ir\!_lib_directory!\*.c ir\!_lib_directory!\c.obj
 		)
 		
 		rem link scripts into BEHAVIOR file
 		ECHO Linking scripts...
-		..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay !_link_libc! ir\!_lib_directory!\*.obj acs\!_lib_name!.lib
+		..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay !_link_libc! !_link_param! ir\!_lib_directory!\*.obj acs\!_lib_name!.lib
 		
 		IF EXIST !_lib_path!\.LOADACS (
 			ECHO !_lib_name!> LOADACS.txt
@@ -158,13 +181,21 @@ FOR /D %%G IN (src\maps\*) DO (
 			IF NOT EXIST ir\!_wad_directory! MKDIR ir\!_wad_directory!
 			..\GDCC\gdcc-ar-wad.exe wad:"!_newest_map_full_path!" --output "ir\!_wad_directory!" --extract
 			
-			rem compile all acs scripts
-			IF EXIST %%G\*.acs (
-				ECHO Compiling ACS scripts...
-				..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom -c !_wad_path!\*.acs ir\!_wad_directory!\acs.obj
+			SET "_link_param="
+			IF EXIST !_wad_path!\AUTOLOAD.txt (
+				FOR /F %%I IN (!_wad_path!\AUTOLOAD.txt) DO (
+					ECHO Autoloading library %%I.
+					SET _link_param=!_link_param! -l%%I
+				)
 			)
 			
 			SET "_link_libc="
+			
+			rem compile all acs scripts
+			IF EXIST %%G\*.acs (
+				ECHO Compiling ACS scripts...
+				..\GDCC\gdcc-acc.exe --warn-all --bc-target=ZDoom !_link_param! -c !_wad_path!\*.acs ir\!_wad_directory!\acs.obj
+			)
 			
 			rem compile all c scripts
 			IF EXIST %%G\*.c (
@@ -172,15 +203,21 @@ FOR /D %%G IN (src\maps\*) DO (
 			
 				CALL :BUILD_LIBC
 				
-				SET _link_libc="-llibc"
+				SET "_link_libc=-llibc"
+				
+				rem PREPROCESS
+				ECHO Preprocessing C scripts...
+				FOR %%I IN (!_wad_path!\*.c) DO (
+					..\GDCC\gdcc-cpp.exe --define XENOTOMB_DEBUG --warn-all --bc-target=ZDoom %%I ir\!_wad_directory!\%%~nxI
+				)
 				
 				ECHO Compiling C scripts...
-				..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom -c !_wad_path!\*.c ir\!_wad_directory!\c.obj
+				..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom !_link_libc! !_link_param! -c ir\!_wad_directory!\*.c ir\!_wad_directory!\c.obj
 			)
 			
 			rem link scripts into BEHAVIOR file
 			ECHO Linking scripts...
-			..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay !_link_libc! ir\!_wad_directory!\*.obj ir\!_wad_directory!\behavior.lib
+			..\GDCC\gdcc-ld.exe --warn-all --bc-target=ZDoom --bc-zdacs-init-delay !_link_libc! !_link_param! ir\!_wad_directory!\*.obj ir\!_wad_directory!\behavior.lib
 			
 			rem pack everything into wad file in \maps
 			
