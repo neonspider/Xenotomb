@@ -1,0 +1,11 @@
+#include "zcommon.acs"
+
+#define POLY_SPEED	65535
+
+script "main" OPEN {
+	Polyobj_MoveToSpot(1, POLY_SPEED, 2);
+	PolyWait(1);
+	Polyobj_MoveToSpot(1, POLY_SPEED, 1);
+	PolyWait(1);
+	Restart;
+}

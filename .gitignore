@@ -27,3 +27,6 @@ LOADACS.txt
 
 # make your own run.bat for testing
 run.bat
+
+# output log from running GZDoom
+log.txt
