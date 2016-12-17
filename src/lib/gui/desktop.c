@@ -3,9 +3,19 @@
 #include <stdio.h>
 
 #include "desktop.h"
+#include "window.h"
 
-[[call("ScriptS"), script("Open")]]
-void main(void)
-{
-	printf("Testing testing one two three\n");
-}
+struct gui_Desktop {
+	struct Window* window;
+	int window_amount;
+	
+	int camera_tid;
+	
+	// output device
+	
+	/* int lineid; // line of the background
+	char* image; */
+	
+	int near_z; // distance from camera to background/reference line
+	
+};
