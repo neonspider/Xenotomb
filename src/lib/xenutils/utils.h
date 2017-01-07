@@ -46,7 +46,14 @@ fixed clamp(fixed value, fixed clamp1, fixed clamp2);
 [[extern("ACS")]]
 fixed round_nearest(fixed value, fixed round);
 
+
 [[extern("ACS")]]
 fixed set_angle_range(fixed angle, fixed range);
+
+[[extern("ACS")]]
+fixed angle_to_radians(fixed angle);
+
+[[extern("ACS")]]
+fixed pitch_to_radians(fixed pitch);
 
 #endif	// UTILS_H

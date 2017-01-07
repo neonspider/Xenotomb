@@ -7,20 +7,24 @@
 #include "../xenutils/utils.h"
 #include "wpnsway.h"
 
-fixed gun_offset_x = 0.0;
-fixed gun_offset_y = 32.0;
+fixed gun_offset_x = 0.0k;
+fixed gun_offset_y = 32.0k;
 
 [[call("ScriptS"), script("Enter")]]
 void main(void)
 {
-	fixed move_offset_y = 0.0;
-	fixed move_offset_z = 0.0;
-	
-	fixed view_offset_x = 0.0;
-	fixed view_offset_y = 0.0;
-	
 	for(;;) {
-		// ...
+		// horizontal movement
+		fixed velx = ACS_GetActorVelX(0);
+		fixed vely = ACS_GetActorVelY(0);
+		fixed velz = ACS_GetActorVelZ(0);
+		
+		fixed angle = angle_to_radians(ACS_GetActorAngle(0));
+		fixed pitch = pitch_to_radians(ACS_GetActorPitch(0));
+		
+		// vertical movement
+		
+		// freelook
 		
 		ACS_Delay(1);
 	}

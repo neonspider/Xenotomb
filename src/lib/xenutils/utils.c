@@ -133,3 +133,16 @@ fixed set_angle_range(fixed angle, fixed range)
 {
 	return angle - round_nearest(angle - range, PI * 2.0k);
 }
+
+[[extern("ACS")]]
+fixed angle_to_radians(fixed angle)
+{
+	return angle * PI / 128.0k;
+}
+
+// PI/2 is straight up, -PI/2 is straight down
+[[extern("ACS")]]
+fixed pitch_to_radians(fixed pitch)
+{
+	return pitch * PI / -180.0k;
+}
