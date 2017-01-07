@@ -25,13 +25,13 @@ fixed get_angle(struct Point coord)
 	if (coord.x) {
 		angle = atan(coord.y / coord.x);
 		
-		if (coord.x < 0)
+		if (coord.x < 0.0k)
 			angle += PI;
 	} else {
-		if (coord.y > 0) {
-			angle = 0.5 * PI;
+		if (coord.y > 0.0k) {
+			angle = 0.5k * PI;
 		} else if (coord.y < 0) {
-			angle = 1.5 * PI;
+			angle = 1.5k * PI;
 		}
 	}
 	return angle;
@@ -115,4 +115,21 @@ fixed clamp(fixed value, fixed clamp1, fixed clamp2)
 		value = high;
 	
 	return value;
+}
+
+[[extern("ACS")]]
+fixed round_nearest(fixed value, fixed round)
+{
+	assert(round != 0.0k);
+	return round * (int)(value / round);
+}
+
+// maps angle to range [range - PI, range + PI]
+//
+// useful for interpolation
+// to ensure never need to move more than PI radians
+[[extern("ACS")]]
+fixed set_angle_range(fixed angle, fixed range)
+{
+	return angle - round_nearest(angle - range, PI * 2.0k);
 }

@@ -2,8 +2,9 @@
 #define UTILS_H
 
 #include <stdfix.h>
+#include <math.h>
 
-#define PI acos(-1.0);
+#define PI acos(-1.0)
 
 struct Point {
 	fixed x;
@@ -41,5 +42,11 @@ fixed max(fixed, fixed);
 // works even if clamp1 > clamp2
 [[extern("ACS")]]
 fixed clamp(fixed value, fixed clamp1, fixed clamp2);
+
+[[extern("ACS")]]
+fixed round_nearest(fixed value, fixed round);
+
+[[extern("ACS")]]
+fixed set_angle_range(fixed angle, fixed range);
 
 #endif	// UTILS_H
