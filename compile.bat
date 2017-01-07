@@ -80,15 +80,16 @@ FOR /D %%G IN (src\lib\*) DO (
 			SET _link_libc="-llibc"
 			
 			rem PREPROCESS
-			ECHO Preprocessing C scripts...
-			FOR %%I IN (!_lib_path!\*.c) DO (
-				..\GDCC\gdcc-cpp.exe %_xenotomb_debug% --warn-all --bc-target=ZDoom %%I ir\!_lib_directory!\%%~nxI
+			REM ECHO Preprocessing C scripts...
+			REM FOR %%I IN (!_lib_path!\*.c) DO (
+				REM ..\GDCC\gdcc-cpp.exe %_xenotomb_debug% --warn-all --bc-target=ZDoom %%I ir\!_lib_directory!\%%~nxI
 				
-				IF NOT EXIST ir\!_lib_directory!\%%~nxI GOTO :BUILD_FAIL
-			)
+				
+				REM IF NOT EXIST ir\!_lib_directory!\%%~nxI GOTO :BUILD_FAIL
+			REM )
 			
 			ECHO Compiling C scripts...
-			..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom !_link_libc! !_link_param! -c ir\!_lib_directory!\*.c ir\!_lib_directory!\c.obj
+			..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom !_link_libc! !_link_param! -c !_lib_path!\*.c ir\!_lib_directory!\c.obj
 			
 			IF NOT EXIST ir\!_lib_directory!\c.obj GOTO :BUILD_FAIL
 		)
@@ -192,15 +193,15 @@ FOR /D %%G IN (src\maps\*) DO (
 				SET "_link_libc=-llibc"
 				
 				rem PREPROCESS
-				ECHO Preprocessing C scripts...
-				FOR %%I IN (!_wad_path!\*.c) DO (
-					..\GDCC\gdcc-cpp.exe %_xenotomb_debug% --warn-all --bc-target=ZDoom %%I ir\!_wad_directory!\%%~nxI
+				REM ECHO Preprocessing C scripts...
+				REM FOR %%I IN (!_wad_path!\*.c) DO (
+					REM ..\GDCC\gdcc-cpp.exe %_xenotomb_debug% --warn-all --bc-target=ZDoom %%I ir\!_wad_directory!\%%~nxI
 					
-					IF NOT EXIST ir\!_wad_directory!\%%~nxI GOTO :BUILD_FAIL
-				)
+					REM IF NOT EXIST ir\!_wad_directory!\%%~nxI GOTO :BUILD_FAIL
+				REM )
 				
 				ECHO Compiling C scripts...
-				..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom !_link_libc! !_link_param! -c ir\!_wad_directory!\*.c ir\!_wad_directory!\c.obj
+				..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom !_link_libc! !_link_param! -c !_wad_path!\*.c ir\!_wad_directory!\c.obj
 				
 				IF NOT EXIST ir\!_wad_directory!\c.obj GOTO :BUILD_FAIL
 			)
