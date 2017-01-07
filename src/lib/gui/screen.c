@@ -3,5 +3,5 @@
 #include "window.h"
 
 struct gui_Screen {
-	
+	int tid;
 };

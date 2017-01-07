@@ -3,6 +3,6 @@
 
 struct gui_Window;
 
-gui_Window* gui_new_window();
+struct gui_Window* gui_new_window(void);
 
 #endif	// WINDOW_H

@@ -2,7 +2,6 @@
 
 #include <stdfix.h>
 #include <stdio.h>
-#include <assert.h>
 #include <stdbool.h>
 
 #include "../../lib/xenutils/utils.h"
@@ -37,8 +36,7 @@ void main(void)
 	cursor_tid = safe_tid();
 	debug_msg("cursor_tid:  %i\n", cursor_tid);
 	
-	for(;;)
-	{
+	for(;;) {
 		ACS_Thing_Remove(shooter_tid);
 		ACS_Thing_Remove(cursor_tid); // get rid of existing actors
 		

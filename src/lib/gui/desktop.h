@@ -3,6 +3,6 @@
 
 struct gui_Desktop;
 
-gui_Desktop* gui_new_desktop();
+struct gui_Desktop* gui_new_desktop(void);
 
 #endif	// DESKTOP_H
