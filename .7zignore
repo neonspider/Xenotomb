@@ -1,0 +1,12 @@
+.git*
+*.lnk
+*.db
+*.dbs
+*.backup*
+*.bak
+build.bat
+compile.bat
+run.bat
+.7zignore
+log.txt
+ir

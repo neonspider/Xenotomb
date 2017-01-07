@@ -8,9 +8,7 @@
 *.dbs
 
 # GZDoom Builder backup files - that's what git's for
-*.backup1
-*.backup2
-*.backup3
+*.backup*
 
 # SLADE backup files - ditto
 *.bak
