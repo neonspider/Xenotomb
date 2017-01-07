@@ -13,7 +13,6 @@ gameinfo
 	//	Still need to make a full wallpaper for this
 	borderflat = "XENOTILE"
 	//	TR-DOS, yo!
-	PlayerClasses = "MyPlayer"
 	menufontcolor_action = "green"
 	menufontcolor_title = "DARKGRAY"
     menufontcolor_label = "DARKGRAY"
@@ -33,6 +32,16 @@ gameinfo
 					"I see what you do\n when you think nobody's watching...",
 					"Hey!\n\nYou didn't pay for this\nso you can't complain!",
 					"Buy our T-shirts!", "Xenotomb lunchboxes, now in stores!"
+					
+	// weapons have been replaced so that weapon sway works
+	weaponslot = 1, "X_Fist", "X_Chainsaw"
+	weaponslot = 2, "X_Pistol"
+	weaponslot = 3, "X_Shotgun", "X_SuperShotgun"
+	weaponslot = 4, "X_Chaingun"
+	weaponslot = 5, "X_RocketLauncher"
+	weaponslot = 6, "X_PlasmaRifle"
+	weaponslot = 7, "X_BFG9000"
+	playerclasses = "X_DoomPlayer"
 }
 
 clearepisodes

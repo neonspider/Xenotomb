@@ -2,9 +2,46 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <math.h>
 #include <stdarg.h>
 
 #include "utils.h"
+
+[[extern("ACS")]]
+struct Point rotate_point(struct Point coord, fixed angle)
+{
+	fixed new_angle = angle - get_angle(coord);
+	fixed length = get_length(coord);
+	
+	struct Point new_point = {length * cos(new_angle),
+							length * sin(new_angle)};
+	return new_point;
+}
+
+[[extern("ACS")]]
+fixed get_angle(struct Point coord)
+{
+	fixed angle = 0.0;
+	if (coord.x) {
+		angle = atan(coord.y / coord.x);
+		
+		if (coord.x < 0)
+			angle += PI;
+	} else {
+		if (coord.y > 0) {
+			angle = 0.5 * PI;
+		} else if (coord.y < 0) {
+			angle = 1.5 * PI;
+		}
+	}
+	return angle;
+}
+
+[[extern("ACS")]]
+fixed get_length(struct Point coord)
+{	
+	return sqrt(coord.x * coord.x + coord.y * coord.y);
+}
 
 [[extern("ACS")]]
 int debug_msg(char* msg, ...)
@@ -51,4 +88,31 @@ int safe_tid(void)
 	debug_msg("safe_tid returning: %i\n", last_tid);
 	
 	return last_tid;
+}
+
+[[extern("ACS")]]
+fixed max(fixed x, fixed y)
+{
+	return (x > y) ? x : y;
+}
+
+[[extern("ACS")]]
+fixed min(fixed x, fixed y)
+{
+	return (x < y) ? x : y;
+}
+
+// works even if clamp1 > clamp2
+[[extern("ACS")]]
+fixed clamp(fixed value, fixed clamp1, fixed clamp2)
+{
+	fixed low  = min(clamp1, clamp2);
+	fixed high = max(clamp1, clamp2);
+	
+	if(value < low)
+		value = low;
+	if(value > high)
+		value = high;
+	
+	return value;
 }

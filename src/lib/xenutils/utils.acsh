@@ -1,9 +1,6 @@
-#ifndef UTILS_H
-#define UTILS_H
+// ACS compatible version of utils.h - TODO
 
-#include <stdfix.h>
-
-#define PI acos(-1.0);
+#pragma fixed on
 
 struct Point {
 	fixed x;
@@ -17,7 +14,7 @@ struct Point rotate_point(struct Point, fixed angle);
 fixed get_angle(struct Point);
 
 [[extern("ACS")]]
-fixed get_length(struct Point);
+fixed get_sign(fixed value, fixed sign);
 
 [[extern("ACS")]]
 int debug_msg(const char*, ...);
@@ -31,15 +28,3 @@ fixed unlerp(fixed x, fixed min, fixed max);
 // multiple times
 [[extern("ACS")]]
 int safe_tid(void);
-
-[[extern("ACS")]]
-fixed min(fixed, fixed);
-
-[[extern("ACS")]]
-fixed max(fixed, fixed);
-
-// works even if clamp1 > clamp2
-[[extern("ACS")]]
-fixed clamp(fixed value, fixed clamp1, fixed clamp2);
-
-#endif	// UTILS_H

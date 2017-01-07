@@ -1,0 +1,5 @@
+generator X_Pistol				BulletChip
+generator X_Chainsaw			BulletChip
+generator X_Shotgun				BulletChip
+generator X_SuperShotgun		BulletChip
+generator X_Chaingun			BulletChip
