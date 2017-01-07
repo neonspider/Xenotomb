@@ -1,4 +1,7 @@
 @ECHO off
+
+TITLE Xenotomb Compilation Process
+
 SETLOCAL ENABLEDELAYEDEXPANSION
 
 SET "_xenotomb_debug=--define XENOTOMB_DEBUG"
