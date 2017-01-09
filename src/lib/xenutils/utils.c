@@ -8,37 +8,18 @@
 #include "utils.h"
 
 [[extern("ACS")]]
-struct Point rotate_point(struct Point coord, fixed angle)
+struct Vec2 rotate_point(struct Vec2 coord, fixed angle)
 {
-	fixed new_angle = angle - get_angle(coord);
+	fixed new_angle = angle - atan2(coord.y, coord.x);
 	fixed length = get_length(coord);
 	
-	struct Point new_point = {length * cos(new_angle),
+	struct Vec2 new_point = {length * cos(new_angle),
 							length * sin(new_angle)};
 	return new_point;
 }
 
 [[extern("ACS")]]
-fixed get_angle(struct Point coord)
-{
-	fixed angle = 0.0;
-	if (coord.x) {
-		angle = atan(coord.y / coord.x);
-		
-		if (coord.x < 0.0k)
-			angle += PI;
-	} else {
-		if (coord.y > 0.0k) {
-			angle = 0.5k * PI;
-		} else if (coord.y < 0) {
-			angle = 1.5k * PI;
-		}
-	}
-	return angle;
-}
-
-[[extern("ACS")]]
-fixed get_length(struct Point coord)
+fixed get_length(struct Vec2 coord)
 {	
 	return sqrt(coord.x * coord.x + coord.y * coord.y);
 }
@@ -121,7 +102,7 @@ fixed clamp(fixed value, fixed clamp1, fixed clamp2)
 fixed round_nearest(fixed value, fixed round)
 {
 	assert(round != 0.0k);
-	return round * (int)(value / round);
+	return round * (int)(value / round + copysign(0.5k, value));
 }
 
 // maps angle to range [range - PI, range + PI]

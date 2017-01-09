@@ -6,19 +6,16 @@
 
 #define PI acos(-1.0)
 
-struct Point {
+struct Vec2 {
 	fixed x;
 	fixed y;
 };
 
 [[extern("ACS")]]
-struct Point rotate_point(struct Point, fixed angle);
+struct Vec2 rotate_point(struct Vec2, fixed angle);
 
 [[extern("ACS")]]
-fixed get_angle(struct Point);
-
-[[extern("ACS")]]
-fixed get_length(struct Point);
+fixed get_length(struct Vec2);
 
 [[extern("ACS")]]
 int debug_msg(const char*, ...);
