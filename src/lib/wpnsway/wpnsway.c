@@ -16,6 +16,7 @@ enum {strafe_amount = 0.1k, vert_amount = 0.1k,
 enum {offset_clamp_left = -32.0k, offset_clamp_right = 32.0k,
 		offset_clamp_up = 0.0k, offset_clamp_down = 64.0k};
 
+struct Vec2 gun_offset = {0.0k, 32.0k};
 
 [[call("ScriptS"), script("Enter")]]
 void main(void)
@@ -43,12 +44,14 @@ void main(void)
 	fixed target_vel_look_side = target_velocity(player_dist_look_side - weapon_dist_look_side, weapon_vel_look_side, look_side_accel);
 	
 	for(;;) {
+		struct Vec2	vel_horz = {ACS_GetActorVelX(0), ACS_GetActorVelY(0)};
 		fixed 			vel_vert = ACS_GetActorVelZ(0);
 		
 		fixed angle = angle_to_radians(ACS_GetActorAngle(0));
 		fixed pitch = pitch_to_radians(ACS_GetActorPitch(0));
 		
 		// horizontal movement
+		struct Vec2 player_view = rotate_point(vel_horz, angle);
 		fixed player_vel_strafe = player_view.x;
 		
 		player_dist_strafe += player_vel_strafe;
