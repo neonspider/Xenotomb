@@ -1,0 +1,23 @@
+#include "actors/weapons.dec"
+#include "actors/monsters.dec"
+#include "actors/decorations.dec"
+
+#include "src/maps/gui_test/actors.dec"
+
+class XenoPlayer : DoomPlayer // Change Player Speed
+{
+	Default
+	{
+		Player.ForwardMove 0.7;
+		Player.SideMove 0.7;
+		Player.JumpZ 10;
+	}
+}
+
+class CutsceneMode : Inventory // used to hide STBAR during cutscenes
+{
+	Default
+	{
+		Inventory.MaxAmount 1;
+	}
+}

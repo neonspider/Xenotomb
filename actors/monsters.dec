@@ -1,43 +1,51 @@
-actor Chomper 10247
+class Chomper : Actor
 {
-	Health 20
-	Radius 24
-	Height 32
-	BloodColor 10,240,100
-	Monster
-	Obituary "%o was chomped up by an alien chomper."
-	DeathSound "chomper/death"
-	+SHOOTABLE
-	+SOLID
-	states
+	Default
+	{
+		Health 20;
+		Radius 24;
+		Height 32;
+		BloodColor "10, 240, 100";
+		Monster;
+		Obituary "%o was chomped up by an alien chomper.";
+		DeathSound "chomper/death";
+		+SHOOTABLE
+		+SOLID
+	}
+	
+	States
 	{
 		Spawn:
-			CHMP A -1
-			Loop
+			CHMP A -1;
+			Loop;
 		Death:
-			CHMP A -1 A_Scream
-			Stop
+			CHMP A -1 A_Scream;
+			Stop;
 	}
 }
 
-actor Worker 10248
+class Worker : Actor
 {
-	Health 60
-	Radius 24
-	Height 64
-	BloodColor 10,240,100
-	Monster
-	Obituary "%o was slimed by an alien worker."
-	DeathSound "chomper/death"
-	+SHOOTABLE
-	+SOLID
-	states
+	Default
+	{
+		Health 60;
+		Radius 24;
+		Height 64;
+		BloodColor "10, 240, 100";
+		Monster;
+		Obituary "%o was slimed by an alien worker.";
+		DeathSound "chomper/death";
+		+SHOOTABLE
+		+SOLID
+	}
+	
+	States
 	{
 		Spawn:
-			WORK A -1
-			Loop
+			WORK A -1;
+			Loop;
 		Death:
-			WORK A -1 A_Scream
-			Stop
+			WORK A -1 A_Scream;
+			Stop;
 	}
 }

@@ -1,19 +1,1 @@
-#include "actors/weapons.dec"
-#include "actors/monsters.dec"
-#include "actors/decorations.dec"
-
 #include "src/lib/acsutils/decorate/changeflag.txt"
-
-#include "src/maps/gui_test/decorate.dec"
-
-Actor MyPlayer : DoomPlayer // Change Player Speed
-{
-    Player.ForwardMove 0.7
-    Player.SideMove 0.7
-	Player.JumpZ 10
-}
-
-Actor CutsceneMode : Inventory // used to hide STBAR during cutscenes
-{
-      Inventory.MaxAmount 1
-}

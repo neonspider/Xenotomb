@@ -76,3 +76,12 @@ map B10 "Fresh Air" //Deprecated. This is now map A10. To be replaced.
 	sky1 = "STAR1"
 	music = "MIDRESET"
 }
+
+DoomEdNums
+{
+	10001 = Ship1
+	10000 = SteamSpawner
+	4444 = GuiMarker
+	10247 = Chomper
+	10248 = Worker
+}
