@@ -1,0 +1,17 @@
+BUILDING XENOTOMB
+
+To build Xenotomb, first download GDCC from the location given in the following link:
+
+https://www.dropbox.com/sh/e4msp35vxp61ztg/AACzzIcbcyFrRhGMamDGcdhMa/gdcc_latest_win64.txt?dl=0
+
+Then create a directory named 'GDCC' adjacent to your Xenotomb directory and extract GDCC into it.
+
+To build Xenotomb as a .pk3, it is necessary to download '7-Zip Extra' from the download page at:
+
+http://www.7-zip.org/download.html
+
+Create a directory named '7z' adjacent to the Xenotomb directory and extract 7-Zip Extra into it.
+
+Then run either 'compile.bat' to compile the project and generate binaries, or run 'build.bat' to
+generate a .pk3 adjacent to the Xenotomb directory. Running build.bat requires Git installed to
+generate the .pk3 name.
