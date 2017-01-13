@@ -1,8 +1,8 @@
-#include "actors/weapons.dec"
-#include "actors/monsters.dec"
-#include "actors/decorations.dec"
+#include "actors/weapons.zs"
+#include "actors/monsters.zs"
+#include "actors/decorations.zs"
 
-#include "src/maps/gui_test/actors.dec"
+#include "src/maps/gui_test/actors.zs"
 
 class XenoPlayer : DoomPlayer // Change Player Speed
 {

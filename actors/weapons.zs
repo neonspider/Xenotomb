@@ -24,7 +24,8 @@ class X_Fist : Fist replaces Fist
 			PUNG A 1
 			{
 				A_WeaponReady(0);
-				A_WeaponOffset(CallACS("get_gun_offset_x"), CallACS("get_gun_offset_y", WOF_INTERPOLATE));
+				A_WeaponOffset(CallACS("get_gun_offset_x"),
+					CallACS("get_gun_offset_y", WOF_INTERPOLATE));
 			}
 			Loop;
 		Fire:
@@ -53,7 +54,8 @@ class X_Pistol : Pistol replaces Pistol
 			PISG A 1
 			{
 				A_WeaponReady(0);
-				A_WeaponOffset(CallACS("get_gun_offset_x"), CallACS("get_gun_offset_y", WOF_INTERPOLATE));
+				A_WeaponOffset(CallACS("get_gun_offset_x"),
+					CallACS("get_gun_offset_y", WOF_INTERPOLATE));
 			}
 			Loop;
 		Fire:
@@ -73,7 +75,8 @@ class X_Chainsaw : Chainsaw replaces Chainsaw
 			SAWG CD 4
 			{
 				A_WeaponReady(0);
-				A_WeaponOffset(CallACS("get_gun_offset_x"), CallACS("get_gun_offset_y", WOF_INTERPOLATE));
+				A_WeaponOffset(CallACS("get_gun_offset_x"),
+					CallACS("get_gun_offset_y", WOF_INTERPOLATE));
 			}
 			Loop;
 		Fire:
@@ -91,7 +94,8 @@ class X_Shotgun : Shotgun replaces Shotgun
 			SHTG A 1
 			{
 				A_WeaponReady(0);
-				A_WeaponOffset(CallACS("get_gun_offset_x"), CallACS("get_gun_offset_y", WOF_INTERPOLATE));
+				A_WeaponOffset(CallACS("get_gun_offset_x"),
+					CallACS("get_gun_offset_y", WOF_INTERPOLATE));
 			}
 			Loop;
 		Fire:
@@ -114,7 +118,8 @@ class X_SuperShotgun : SuperShotgun replaces SuperShotgun
 			SHT2 A 1
 			{
 				A_WeaponReady(0);
-				A_WeaponOffset(CallACS("get_gun_offset_x"), CallACS("get_gun_offset_y", WOF_INTERPOLATE));
+				A_WeaponOffset(CallACS("get_gun_offset_x"),
+					CallACS("get_gun_offset_y", WOF_INTERPOLATE));
 			}
 			Loop;
 		Fire:
@@ -140,7 +145,8 @@ class X_Chaingun : Chaingun replaces Chaingun
 			CHGG A 1
 			{
 				A_WeaponReady(0);
-				A_WeaponOffset(CallACS("get_gun_offset_x"), CallACS("get_gun_offset_y", WOF_INTERPOLATE));
+				A_WeaponOffset(CallACS("get_gun_offset_x"),
+					CallACS("get_gun_offset_y", WOF_INTERPOLATE));
 			}
 			Loop;
 		Fire:
@@ -158,7 +164,8 @@ class X_RocketLauncher : RocketLauncher replaces RocketLauncher
 			MISG A 1
 			{
 				A_WeaponReady(0);
-				A_WeaponOffset(CallACS("get_gun_offset_x"), CallACS("get_gun_offset_y", WOF_INTERPOLATE));
+				A_WeaponOffset(CallACS("get_gun_offset_x"),
+					CallACS("get_gun_offset_y", WOF_INTERPOLATE));
 			}
 			Loop;
 		Fire:
@@ -177,7 +184,8 @@ class X_PlasmaRifle : PlasmaRifle replaces PlasmaRifle
 			PLSG A 1
 			{
 				A_WeaponReady(0);
-				A_WeaponOffset(CallACS("get_gun_offset_x"), CallACS("get_gun_offset_y", WOF_INTERPOLATE));
+				A_WeaponOffset(CallACS("get_gun_offset_x"),
+					CallACS("get_gun_offset_y", WOF_INTERPOLATE));
 			}
 			Loop;
 		Fire:
@@ -195,7 +203,8 @@ class X_BFG9000 : BFG9000 replaces BFG9000
 			BFGG A 1
 			{
 				A_WeaponReady(0);
-				A_WeaponOffset(CallACS("get_gun_offset_x"), CallACS("get_gun_offset_y", WOF_INTERPOLATE));
+				A_WeaponOffset(CallACS("get_gun_offset_x"),
+					CallACS("get_gun_offset_y", WOF_INTERPOLATE));
 			}
 			Loop;
 		Fire:
