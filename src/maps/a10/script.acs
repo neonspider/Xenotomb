@@ -15,7 +15,8 @@ script "Cutscene" ENTER //Map start cutscene
 	SetMusic("X_LOADIN");
 	SetHudSize(640, 480, 0);
 	SetFont("FONTA");
-	HudMessage(l:"XENOTOMB_A10_DOCK"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_GREEN, 320.0, 200.0, 3.0, 0.02, 1.0);
+	HudMessage(l:"XENOTOMB_A10_DOCK"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD,
+		0, CR_GREEN, 320.0, 200.0, 3.0, 0.02, 1.0);
     Delay(35 * 5);
 	
 	SetFont("CUTA10A1");
@@ -81,13 +82,15 @@ script "Info" (void) //Map start cutscene
 	ChangeCamera(4, 0, 0);
 	SetHudSize(640, 480, false);
 	SetFont("FONTA");
-	HudMessage(l:"XENOTOMB_A10_HUDINIT"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
+	HudMessage(l:"XENOTOMB_A10_HUDINIT"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD,
+		0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
     Delay(35 * 5);
 	
 	TakeInventory("CutsceneMode", 1); // hide STBAR
 	
 	PlaySound(0, "Computer/Alert2");
-	HudMessage(l:"XENOTOMB_A10_HUDINIT2"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
+	HudMessage(l:"XENOTOMB_A10_HUDINIT2"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD,
+		0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
     Delay(35 * 6);
 	
     FadeTo(0, 0, 0, 0.0, 2.0);
@@ -140,7 +143,8 @@ script "Intro Airlock" (void) //Opening airlock door
 	Thing_Deactivate(1);
 	SetHudSize(640, 480, FALSE);
 	PlaySound(0, "Computer/Alert");
-	HudMessage(l:"XENOTOMB_A10_GRAVITY"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+	HudMessage(l:"XENOTOMB_A10_GRAVITY"; HUDMSG_TYPEON,
+		0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
     Delay(35 * 1);
 	
 	SetThingSpecial(2, 0, 0, 255, 0);
@@ -176,7 +180,8 @@ script "Exit Script" (void) //Exiting script
 	
 	SetHudSize(640, 480, FALSE);
 	SetFont("FONTA");
-	HudMessage(l:"XENOTOMB_A10_INCOMING"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
+	HudMessage(l:"XENOTOMB_A10_INCOMING"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD,
+		0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
 	Delay(35 * 4);
 	
 	Exit_Normal(0);
@@ -190,7 +195,8 @@ script "Exit Airlock" (void) //Opening airlock door
 	
 	Thing_Deactivate(1);
 	SetHudSize(640, 480, FALSE);
-	HudMessage(l:"XENOTOMB_A10_GRAVITY"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+	HudMessage(l:"XENOTOMB_A10_GRAVITY"; HUDMSG_TYPEON,
+		0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
     Delay(35 * 1);
 	
 	SetThingSpecial(7, 0, 0, 255, 0);

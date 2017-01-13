@@ -10,9 +10,11 @@ script "Info" ENTER //Map start cutscene
 	ChangeCamera (4,0,0);
 	SetHudSize (640,480,false);
 	SetFont ("FONTA");
-	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cfInitializing..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.025, 1.0);
+	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cfInitializing...";
+		HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.025, 1.0);
     Delay (35 * 5);
-	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cnInitialized..."; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.025, 1.0);
+	HudMessage (s:"AVALON TECHNOLOGIES HUD SYSTEM v7.0 \cnInitialized...";
+		HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD, 0, CR_CYAN, 320.0, 200.0, 3.0, 0.025, 1.0);
     Delay (35 * 6);
     FadeTo (0, 0, 0, 0.0, 2.0);
     Delay (35 * 1);
@@ -24,14 +26,15 @@ script "Info" ENTER //Map start cutscene
 	FadeTo (0, 0, 0, 0.0, 0.2);
 }
 
-//script "Skip Text" ENTER
-//{
-	//while (TRUE)
-	//{
-	//HudMessage (s:"Press 'USE' to skip story sequences"; HUDMSG_PLAIN, 0, CR_WHITE, 0, 0, 0.9, 0.1, 1.0);
-	//Delay (30);
-	//}
-//}
+/* script "Skip Text" ENTER
+{
+	while (TRUE)
+	{
+	HudMessage (s:"Press 'USE' to skip story sequences";
+		HUDMSG_PLAIN, 0, CR_WHITE, 0, 0, 0.9, 0.1, 1.0);
+	Delay (30);
+	}
+} */
 
 script "Spark Intro Door" ENTER
 {
@@ -53,7 +56,8 @@ script "Intro Airlock" (void) //Opening airlock door
     Delay (35 * 5);
 	Thing_Deactivate (1);
 	SetHudSize (640,480,false);
-	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED";
+		HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
     Delay (35 * 1);
 	SetThingSpecial (2,0,0,255,0);
 	SetThingSpecial (3,0,255,100,0);
@@ -86,7 +90,8 @@ script "Exit Airlock" (void) //Opening airlock door
     Delay (35 * 5);
 	Thing_Deactivate (1);
 	SetHudSize (640,480,false);
-	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED"; HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
+	HudMessage (s:"DEPRESSURIZATION DETECTED, \nARTIFICIAL GRAVITY ENGAGED";
+		HUDMSG_TYPEON, 0, CR_GREEN, 320.0, 200.0, 5.0, 0.05, 1.0);
     Delay (35 * 1);
 	SetThingSpecial (7,0,0,255,0);
 	SetAirControl (0.001);

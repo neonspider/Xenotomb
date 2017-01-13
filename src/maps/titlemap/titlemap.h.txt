@@ -1,3 +1,5 @@
+// old version of script, kept around for historical reasons
+
 struct Hud_image {
 	__str font;
 	

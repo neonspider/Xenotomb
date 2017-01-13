@@ -1,3 +1,5 @@
+// old version of script, kept around for historical reasons
+
 #include <ACS_ZDoom.h>
 
 #include <limits.h>
@@ -106,14 +108,18 @@ void display_image(struct Hud_image image)
 	
 	if(image.fadeout_time > 0.0) { // use HUDMSG_FADEOUT or HUDMSG_FADEINOUT
 		if(image.fadein_time > 0.0) { // use HUDMSG_FADEINOUT
-			ACS_OptHudMessage(HUDMSG_FADEINOUT, image.msg_id, CR_UNTRANSLATED, 0.5, 0.5, image.hold_time);
+			ACS_OptHudMessage(HUDMSG_FADEINOUT, image.msg_id,
+				CR_UNTRANSLATED, 0.5, 0.5, image.hold_time);
+				
 			ACS_EndHudMessage(image.fadein_time, image.fadeout_time);
 		} else { // use HUDMSG_FADEOUT
-			ACS_OptHudMessage(HUDMSG_FADEOUT, image.msg_id, CR_UNTRANSLATED, 0.5, 0.5, image.hold_time);
+			ACS_OptHudMessage(HUDMSG_FADEOUT, image.msg_id, CR_UNTRANSLATED,
+				0.5, 0.5, image.hold_time);
 			ACS_EndHudMessage(0.0, image.fadeout_time);
 		}
 	} else { // use HUDMSG_PLAIN
-		ACS_OptHudMessage(HUDMSG_PLAIN, image.msg_id, CR_UNTRANSLATED, 0.5, 0.5, image.hold_time);
+		ACS_OptHudMessage(HUDMSG_PLAIN, image.msg_id, CR_UNTRANSLATED,
+			0.5, 0.5, image.hold_time);
 		ACS_EndHudMessage();
 	}
 }
