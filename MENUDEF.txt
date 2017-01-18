@@ -1,62 +1,75 @@
 DEFAULTLISTMENU
 {
-Selector "-", -32, -5
-Linespacing 16
-Font "FONT1", "Untranslated"
+	Selector "-", -32, -5
+	Linespacing 16
+	Font "FONT1", "Untranslated"
 }
 
 LISTMENU "MainMenu"
 {
-		//StaticPatch 94, 0, "M_DOOM"
-		Position 97, 72
-		StaticPatch 40, 10, "M_SKL01"
-		StaticPatch 232, 10, "M_SKL00"
-		
-		TextItem "New Game", "n", "PlayerclassMenu"
-		TextItem "Load Data", "l", "LoadGameMenu"
-		//PatchItem "M_SAVEG", "s", "SaveGameMenu"
-		TextItem "Setup","o", "OptionsMenu"
-		TextItem "Register!","r", "ReadThisMenu"
-		TextItem "Quit Game", "q", "QuitMenu"
-		
-		Font "FONT1", "Lightblue"
-		StaticText 0, 220, "Pre-Alpha, share if you dare..."
-		Font "FONT1", "Yellow"
-		//StaticText 100, 220, "Shareware Version!"
-		StaticPatch 320, 215, "LOGO"
+	//StaticPatch 94, 0, "M_DOOM"
+	Position 97, 72
+	StaticPatch 40, 10, "M_SKL01"
+	StaticPatch 232, 10, "M_SKL00"
+	
+	TextItem "New Game", "n", "PlayerclassMenu"
+	TextItem "Load Data", "l", "LoadGameMenu"
+	//PatchItem "M_SAVEG", "s", "SaveGameMenu"
+	TextItem "Setup","o", "OptionsMenu"
+	TextItem "Register!","r", "ReadThisMenu"
+	TextItem "Quit Game", "q", "QuitMenu"
+	
+	Font "FONT1", "Lightblue"
+	StaticText 0, 220, "Pre-Alpha, share if you dare..."
+	Font "FONT1", "Yellow"
+	//StaticText 100, 220, "Shareware Version!"
+	StaticPatch 320, 215, "LOGO"
 }
 
 ListMenu "EpisodeMenu"
 {
-		NetgameMessage "$NEWGAME"
-		Position 48, 63
-		Font "FONT1", "Untranslated"
-		StaticTextCentered 100, 0, "Map Selection"
-		Font "Confont", "Untranslated"
-		StaticTextCentered 100, 20, "(DEBUGGER FEATURES, YO!)"
+	NetgameMessage "$NEWGAME"
+	Position 48, 63
+	Font "FONT1", "Untranslated"
+	StaticTextCentered 100, 0, "Map Selection"
+	Font "Confont", "Untranslated"
+	StaticTextCentered 100, 20, "(DEBUGGER FEATURES, YO!)"
 }
 
 OptionMenu "OptionsMenu"
 {
 	Title "$OPTMNU_TITLE"
+	
+	Slider "lookamtx",		"wpnsway_lookamtx",		-1.0, 1.0, 0.1
+	Slider "lookamty",		"wpnsway_lookamty",		-1.0, 1.0, 0.1
+	Slider "strafeamt",		"wpnsway_strafeamt",	-1.0, 1.0, 0.1
+	Slider "vertamt",		"wpnsway_vertamt",		-1.0, 1.0, 0.1
+	StaticText " "
+	Slider "pitchamt",		"wpnsway_pitchamt",		-1.0, 1.0, 0.1
+	StaticText " "
+	Slider "lookaccelx",	"wpnsway_lookaccelx",	1.0, 100.0, 1.0
+	Slider "lookaccely",	"wpnsway_lookaccely",	1.0, 100.0, 1.0
+	Slider "strafeaccel",	"wpnsway_strafeaccel",	1.0, 100.0, 1.0
+	Slider "vertaccel",		"wpnsway_vertaccel",	1.0, 100.0, 1.0
+	
 	Submenu "$OPTMNU_CONTROLS",			"CustomizeControls"
-	Submenu "$OPTMNU_MOUSE",				"MouseOptions"
+	Submenu "$OPTMNU_MOUSE",			"MouseOptions"
 	Submenu "$OPTMNU_JOYSTICK",			"JoystickOptions"
 	StaticText " "
 	Submenu "$OPTMNU_PLAYER",			"PlayerMenu"
-	//Submenu "$OPTMNU_GAMEPLAY",			"GameplayOptions"
-	//Submenu "$OPTMNU_COMPATIBILITY",	"CompatibilityOptions"
+	// Submenu "$OPTMNU_GAMEPLAY",			"GameplayOptions"
+	// Submenu "$OPTMNU_COMPATIBILITY",	"CompatibilityOptions"
 	Submenu "$OPTMNU_AUTOMAP",			"AutomapOptions"
 	Submenu "$OPTMNU_HUD",				"HUDOptions"
-	//Submenu "$OPTMNU_MISCELLANEOUS",	"MiscOptions"
-	//Submenu "$OPTMNU_NETWORK",		"NetworkOptions"
-	Submenu "$OPTMNU_SOUND",		"SoundOptions"
-	Submenu "$OPTMNU_DISPLAY",	"VideoOptions"
-	Submenu "$OPTMNU_VIDEO",		"VideoModeMenu"
+	// Submenu "$OPTMNU_MISCELLANEOUS",	"MiscOptions"
+	// Submenu "$OPTMNU_NETWORK",			"NetworkOptions"
+	Submenu "$OPTMNU_SOUND",			"SoundOptions"
+	Submenu "$OPTMNU_DISPLAY",			"VideoOptions"
+	Submenu "$OPTMNU_VIDEO",			"VideoModeMenu"
 	StaticText " "
-	SafeCommand "$OPTMNU_DEFAULTS",	"reset2defaults"
+	SafeCommand "$OPTMNU_DEFAULTS",		"reset2defaults"
 	SafeCommand	"$OPTMNU_RESETTOSAVED",	"reset2saved"
 	StaticText " "
 	StaticText "This version of Xenotomb is SHAREWARE!"
-	//Command "$OPTMNU_CONSOLE",			"menuconsole"
+	// Command "$OPTMNU_CONSOLE",			"menuconsole"
 }

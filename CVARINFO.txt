@@ -1,0 +1,11 @@
+user float wpnsway_lookamtx = 0.0;
+user float wpnsway_lookamty = 0.0;
+user float wpnsway_strafeamt = 0.0;
+user float wpnsway_vertamt = 0.0;
+
+user float wpnsway_pitchamt = 0.0;
+
+user float wpnsway_lookaccelx = 1.0;
+user float wpnsway_lookaccely = 1.0;
+user float wpnsway_strafeaccel = 1.0;
+user float wpnsway_vertaccel = 1.0;

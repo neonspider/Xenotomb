@@ -1,5 +1,6 @@
 #include <ACS_ZDoom.h>
 
+#include <stdbool.h>
 #include <assert.h>
 #include <stdio.h>
 #include <math.h>
@@ -7,46 +8,26 @@
 
 #include "utils.h"
 
+// all angles are in FIXED POINT - 1.0 units per full turn
+
 [[extern("ACS")]]
 struct Vec2 rotate_point(struct Vec2 coord, fixed angle)
 {
-	fixed new_angle = angle - atan2(coord.y, coord.x);
-	fixed length = get_length(coord);
+	fixed new_angle = angle-ACS_VectorLength(coord.x, coord.y);
+	fixed length = ACS_VectorLength(coord.x, coord.y);
 	
-	struct Vec2 new_point = {length * cos(new_angle),
-							length * sin(new_angle)};
+	struct Vec2 new_point = {length*ACS_Cos(new_angle),
+							length*ACS_Sin(new_angle)};
 	return new_point;
 }
 
-[[extern("ACS")]]
-fixed get_length(struct Vec2 coord)
-{	
-	return sqrt(coord.x * coord.x + coord.y * coord.y);
-}
-
-[[extern("ACS")]]
-int debug_msg(char* msg, ...)
-{
-	int result = 0;
-	
-	#ifdef XENOTOMB_DEBUG
-	
-    va_list args;
-    va_start(args, msg);
-    result = vprintf(msg, args);
-    va_end(args);
-	
-	#endif // XENOTOMB_DEBUG
-	
-    return result;
-	
-}
-
+// "unlerps" number to return result between 0 and 1
+// returns -1 for error
 [[extern("ACS")]]
 accum unlerp(accum x, accum min, accum max)
 {
-	assert(min < max);
-	return (x - min) / (max - min);
+	if (!(min < max)) return -1;
+	return (x-min)/(max-min);
 }
 
 [[extern("ACS")]]
@@ -54,16 +35,17 @@ int safe_tid(void)
 {
 	static int last_tid = 0;
 	
-	debug_msg("safe_tid before: last_tid = %i\n", last_tid);
+	debug_msg("safe_tid before: last_tid = %d\n", last_tid);
+	
 	last_tid = ACS_UniqueTID(++last_tid, 0);
 	debug_msg("safe_tid after:  last_tid = %i\n", last_tid);
 	
-	if(last_tid == 0) { // can't find a free tid
-		debug_msg("safe_tid: can't find free tid\n");
+	if (last_tid==0) { // can't find a free tid
+		debug_msg("safe_tid: can't find free tid%s\n", "");
 		last_tid = ACS_UniqueTID(1, 0); // so start again at 1
 		debug_msg("safe_tid try again: last_tid = %i\n", last_tid);
 		
-		assert(last_tid != 0); // if last_tid is 0, no free tids on map
+		assert(last_tid!=0); // if last_tid is 0, no free tids on map
 	}
 	
 	debug_msg("safe_tid returning: %i\n", last_tid);
@@ -74,25 +56,25 @@ int safe_tid(void)
 [[extern("ACS")]]
 fixed max(fixed x, fixed y)
 {
-	return (x > y) ? x : y;
+	return (x>y) ? x : y;
 }
 
 [[extern("ACS")]]
 fixed min(fixed x, fixed y)
 {
-	return (x < y) ? x : y;
+	return (x<y) ? x : y;
 }
 
 // works even if clamp1 > clamp2
 [[extern("ACS")]]
 fixed clamp(fixed value, fixed clamp1, fixed clamp2)
 {
-	fixed low  = min(clamp1, clamp2);
+	fixed low =min(clamp1, clamp2);
 	fixed high = max(clamp1, clamp2);
 	
-	if(value < low)
+	if (value<low)
 		value = low;
-	if(value > high)
+	if (value>high)
 		value = high;
 	
 	return value;
@@ -101,29 +83,42 @@ fixed clamp(fixed value, fixed clamp1, fixed clamp2)
 [[extern("ACS")]]
 fixed round_nearest(fixed value, fixed round)
 {
-	assert(round != 0.0k);
-	return round * (int)(value / round + copysign(0.5k, value));
+	if (round==0.0k); // TODO - error handling
+	return round*(int)(value/round+copysign(0.5k, value));
 }
 
-// maps angle to range [range - PI, range + PI]
+// maps angle to range [range - M_PI, range + M_PI]
 //
 // useful for interpolation
-// to ensure never need to move more than PI radians
+// to ensure never need to move more than M_PI radians
 [[extern("ACS")]]
 fixed set_angle_range(fixed angle, fixed range)
 {
-	return angle - round_nearest(angle - range, PI * 2.0k);
+	return angle-round_nearest(angle-range, 1.0k); // fixed point angle
 }
 
 [[extern("ACS")]]
 fixed angle_to_radians(fixed angle)
 {
-	return angle * PI / 128.0k;
+	return angle*M_PI/128.0k;
 }
 
-// PI/2 is straight up, -PI/2 is straight down
+// M_PI/2 is straight up, -M_PI/2 is straight down
 [[extern("ACS")]]
 fixed pitch_to_radians(fixed pitch)
 {
-	return pitch * PI / -180.0k;
+	return pitch*M_PI/-180.0k;
+}
+
+[[extern("ACS")]]
+fixed angle_to_fixed(fixed angle)
+{
+	return angle/256.0k;
+}
+
+// M_PI/2 is straight up, -M_PI/2 is straight down
+[[extern("ACS")]]
+fixed pitch_to_fixed(fixed pitch)
+{
+	return pitch/-360.0k;
 }
