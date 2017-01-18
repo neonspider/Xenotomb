@@ -4,7 +4,8 @@ TITLE Xenotomb Compilation Process
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-SET "_xenotomb_debug=--define XENOTOMB_DEBUG"
+SET "_xenotomb_debug=--define NDEBUG"
+IF /I "%1"=="/D" SET "_xenotomb_debug=--define XENO_DEBUG"
 
 rem change to working directory
 CD /D %~dp0
@@ -36,7 +37,6 @@ FOR /D %%G IN (src\lib\*) DO (
 	rem check for scripts
 	
 	ECHO(
-	ECHO Checking library %%G...
 	
 	SET "_lib_script_exist="
 	
@@ -82,16 +82,8 @@ FOR /D %%G IN (src\lib\*) DO (
 			
 			SET _link_libc="-llibc"
 			
-			rem PREPROCESS
-			REM ECHO Preprocessing C scripts...
-			REM FOR %%I IN (!_lib_path!\*.c) DO (
-				REM ..\GDCC\gdcc-cpp.exe %_xenotomb_debug% --warn-all --bc-target=ZDoom %%I ir\!_lib_directory!\%%~nxI
-				
-				
-				REM IF NOT EXIST ir\!_lib_directory!\%%~nxI GOTO :BUILD_FAIL
-			REM )
-			
 			ECHO Compiling C scripts...
+			
 			..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom !_link_libc! !_link_param! -c !_lib_path!\*.c ir\!_lib_directory!\c.obj
 			
 			IF NOT EXIST ir\!_lib_directory!\c.obj GOTO :BUILD_FAIL
@@ -119,13 +111,10 @@ ECHO Compiling maps...
 rem go through each directory in src\maps
 FOR /D %%G IN (src\maps\*) DO (
 	ECHO(
-	ECHO Checking map %%G...
 
 	rem check for .wad files
 	IF EXIST %%G\*.wad (
 		IF NOT EXIST maps\ MKDIR maps\
-		
-		ECHO Map files found in %%G.
 
 		rem get immediate map directory			
 		SET _wad_path=%%G
@@ -140,18 +129,15 @@ FOR /D %%G IN (src\maps\*) DO (
 		)
 		
 		SET _newest_map_full_path=!_wad_full_path!\!_newest_map!
+		SET _newest_map_log_path=!_wad_path!\!_newest_map!
 		
 		IF !_wad_amount! GTR 1 (
-			ECHO Multple maps found, using map file !_newest_map_full_path!
+			ECHO Multple maps found in %%G.
 		) ELSE (
-			ECHO Using map file !_newest_map_full_path!
+			ECHO Map file found in %%G.
 		)
-			
-		REM ECHO _wad_path = !_wad_path!
-		REM ECHO _wad_full_path = !_wad_full_path!
-		REM ECHO _wad_directory = !_wad_directory!
-		REM ECHO _newest_map = !_newest_map!
-		REM ECHO _newest_map_full_path = !_newest_map_full_path!
+		
+		ECHO Using map file !_newest_map_log_path!
 		
 		rem check for scripts
 		SET "_script_exist="
@@ -163,7 +149,7 @@ FOR /D %%G IN (src\maps\*) DO (
 			ECHO Found scripts in %%G.
 			
 			rem extract map .wad into \ir directory
-			ECHO Extracting map to "ir\!_wad_directory!"...
+			ECHO Extracting map to ir\!_wad_directory!...
 			IF NOT EXIST ir\!_wad_directory! MKDIR ir\!_wad_directory!
 			..\GDCC\gdcc-ar-wad.exe wad:"!_newest_map_full_path!" --output "ir\!_wad_directory!" --extract
 			
@@ -195,16 +181,8 @@ FOR /D %%G IN (src\maps\*) DO (
 				
 				SET "_link_libc=-llibc"
 				
-				rem PREPROCESS
-				REM ECHO Preprocessing C scripts...
-				REM FOR %%I IN (!_wad_path!\*.c) DO (
-					REM ..\GDCC\gdcc-cpp.exe %_xenotomb_debug% --warn-all --bc-target=ZDoom %%I ir\!_wad_directory!\%%~nxI
-					
-					REM IF NOT EXIST ir\!_wad_directory!\%%~nxI GOTO :BUILD_FAIL
-				REM )
-				
 				ECHO Compiling C scripts...
-				..\GDCC\gdcc-cc.exe --warn-all --bc-target=ZDoom !_link_libc! !_link_param! -c !_wad_path!\*.c ir\!_wad_directory!\c.obj
+				..\GDCC\gdcc-cc.exe %_xenotomb_debug% --warn-all --bc-target=ZDoom !_link_libc! !_link_param! -c !_wad_path!\*.c ir\!_wad_directory!\c.obj
 				
 				IF NOT EXIST ir\!_wad_directory!\c.obj GOTO :BUILD_FAIL
 			)
@@ -255,8 +233,6 @@ PAUSE
 GOTO :EOF
 
 :BUILD_LIBC
-ECHO Checking libc...
-
 IF NOT EXIST acs\libc.lib (
 	ECHO Compiling libc...
 	..\GDCC\gdcc-makelib.exe --bc-target=ZDoom --bc-zdacs-init-delay --alloc-min Sta "" 1000000000 libGDCC libc -o acs\libc.lib
