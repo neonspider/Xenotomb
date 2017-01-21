@@ -1,0 +1,4 @@
+rewrite build scripts in python
+write cutscene library
+finish weapon sway code
+dynamic music?
