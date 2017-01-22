@@ -5,8 +5,11 @@
 *.backup*
 *.bak
 build.bat
+build.py
 compile.bat
+compile.py
 run.bat
+run.py
 .7zignore
 log.txt
 ir
