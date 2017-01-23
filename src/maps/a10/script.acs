@@ -1,4 +1,5 @@
 #include "zcommon.acs"
+#import "../../lib/cutscene/cutscene.acsh"
 
 str gravitytext = "";
 int skiptext = TRUE;
@@ -8,85 +9,83 @@ script "Cutscene" ENTER //Map start cutscene
 	SetMusic("MIDRESET");
 	FadeTo(0, 0, 0, 1.0, 0.0);
 	ClearInventory();
-	GiveInventory("CutsceneMode", 1); // hide STBAR
-	AmbientSound("Cutscene/A10a_sfx", 127);
-	Delay(16);
 	
-	SetMusic("X_LOADIN");
-	SetHudSize(640, 480, 0);
-	SetFont("FONTA");
-	HudMessage(l:"XENOTOMB_A10_DOCK"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD,
+	cs_begin_cutscene();
+	
+	cs_AmbientSound("Cutscene/A10a_sfx", 127);
+	cs_Delay(16);
+	
+	cs_SetMusic("X_LOADIN");
+	cs_SetHudSize(640, 480, 0);
+	cs_SetFont("FONTA");
+	cs_HudMessage(l:"XENOTOMB_A10_DOCK"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD,
 		0, CR_GREEN, 320.0, 200.0, 3.0, 0.02, 1.0);
-    Delay(35 * 5);
+    cs_Delay(35 * 5);
 	
-	SetFont("CUTA10A1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
-	Delay(35 * 6);
+	cs_SetFont("CUTA10A1");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	cs_Delay(35 * 6);
 	
-	SetFont("CUTA10B1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 8, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
-	Delay(35 * 6);
+	cs_SetFont("CUTA10B1");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 8, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	cs_Delay(35 * 6);
 	
-	SetFont("CUTA10A1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 7, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
-	Delay(35 * 1);
+	cs_SetFont("CUTA10A1");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 7, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	cs_Delay(35 * 1);
 	
-	SetFont("CUTA10A2");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 6, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
-	Delay(24);
+	cs_SetFont("CUTA10A2");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 6, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	cs_Delay(24);
 	
-	SetFont("CUTA10A3");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 5, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
-	Delay(24);
+	cs_SetFont("CUTA10A3");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 5, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	cs_Delay(24);
 	
-	SetFont("CUTA10A4");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 4, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
-	Delay(35 * 4);
+	cs_SetFont("CUTA10A4");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 4, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	cs_Delay(35 * 4);
 	
-	SetFont("CUTA10B1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 3, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
-	Delay(35 * 6);
+	cs_SetFont("CUTA10B1");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 3, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	cs_Delay(35 * 6);
 	
-	SetFont("CUTA10C1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
-	Delay(35 * 3);
+	cs_SetFont("CUTA10C1");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	cs_Delay(35 * 3);
 	
-	SetFont("CUTA10C2");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 8, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
-	Delay(35 * 5);
+	cs_SetFont("CUTA10C2");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 8, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	cs_Delay(35 * 5);
 	
-	SetFont("CUTA10D1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
-	Delay(35 * 4);
+	cs_SetFont("CUTA10D1");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	cs_Delay(35 * 4);
 	
-	SetFont("CUTA10E1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
-	Delay(35 * 4);
+	cs_SetFont("CUTA10E1");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 2.0, 1.0, 1.0);
+	cs_Delay(35 * 4);
 	
-	SetFont("CUTA10F1");
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
-	Delay(35 * 3);
+	cs_SetFont("CUTA10F1");
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	cs_Delay(35 * 3);
 	
-	FadeTo(100, 20, 0, 1.0, 0.0);
-	SetFont("CUTA10F2");
-	FadeTo(0, 0, 0, 1.0, 1.0);
-	HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
-	Delay(35 * 6);
+	cs_FadeTo(100, 20, 0, 1.0, 0.0);
+	cs_SetFont("CUTA10F2");
+	cs_FadeTo(0, 0, 0, 1.0, 1.0);
+	cs_HudMessage(s:"A";HUDMSG_FADEINOUT, 9, CR_UNTRANSLATED, 0.5, 0.5, 4.0, 1.0, 1.0);
+	cs_Delay(35 * 6);
 	
-	ACS_NamedExecute("Info", 0, 0, 0, 0);
-	ACS_NamedExecute("Spark Intro Door", 0, 0, 0, 0);
-}
-
-script "Info" (void) //Map start cutscene
-{
-	ChangeCamera(4, 0, 0);
-	SetHudSize(640, 480, false);
-	SetFont("FONTA");
-	HudMessage(l:"XENOTOMB_A10_HUDINIT"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD,
+	ACS_NamedExecute("Spark Intro Door", 0);
+	
+	cs_ChangeCamera(4, 0, 0);
+	cs_SetHudSize(640, 480, false);
+	cs_SetFont("FONTA");
+	cs_HudMessage(l:"XENOTOMB_A10_HUDINIT"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD,
 		0, CR_CYAN, 320.0, 200.0, 3.0, 0.02, 1.0);
-    Delay(35 * 5);
+	cs_Delay(35 * 5);
 	
-	TakeInventory("CutsceneMode", 1); // hide STBAR
+	cs_end_cutscene();
 	
 	PlaySound(0, "Computer/Alert2");
 	HudMessage(l:"XENOTOMB_A10_HUDINIT2"; HUDMSG_TYPEON | HUDMSG_LAYER_OVERHUD,
@@ -110,15 +109,6 @@ script "Info" (void) //Map start cutscene
 	
 	SetMusicVolume(100.0);
 }
-
-/* script "Skip Text" ENTER //Still needs the crossmap script to be implemented before we use this.
-{
-	while(TRUE)
-	{
-	HudMessage(l:"XENOTOMB_SKIP_CUTSCENE"; HUDMSG_PLAIN, 0, CR_WHITE, 0, 0, 0.9, 0.1, 1.0);
-	Delay(30);
-	}
-} */
 
 script "Spark Intro Door" (void)
 {

@@ -1,0 +1,37 @@
+#library "cutscene"
+
+#ifndef CUTSCENE_ACSH
+#define CUTSCENE_ACSH
+
+#pragma define raw ON
+
+#libdefine cs_Delay(tics) \
+	do { \
+		if(cs_is_playing()) \
+			Delay(tics); \
+	} while(0)
+	
+#libdefine cs_HudMessage(...) \
+	do { \
+		if(cs_is_playing()) \
+			HudMessage(__VA_ARGS__); \
+	} while(0)
+
+function void cs_AmbientSound(str sound, int volume);
+function void cs_ChangeCamera(int tid, int who, int revert);
+function void cs_FadeTo(int red, int green, int blue, fixed amount, fixed seconds);
+function void cs_SetMusic(str song); // no optional args for now
+function void cs_SetHudSize(int width, int height, bool statusbar);
+function void cs_SetFont(str fontlump);
+
+function void cs_begin_cutscene(void);
+function void cs_end_cutscene(void);
+
+function bool cs_skipped(void);
+
+function bool cs_is_playing(void);
+function bool cs_is_fading(void);
+
+function void cs_set_skip_buttons(int);
+
+#endif // CUTSCENE_ACSH
