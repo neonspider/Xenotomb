@@ -13,21 +13,23 @@ IF NOT EXIST ..\7z\ (
 	EXIT /B
 )
 
-rem mostly stolen from wolfendoom boa build.bat
-FOR /F %%I IN ('GIT --git-dir=".\.git" rev-parse --short HEAD') DO SET _git_commit_hash=%%I
+REM mostly stolen from wolfendoom boa build.bat
+REM FOR /F %%I IN ('GIT --git-dir=".\.git" rev-parse --short HEAD') DO SET _git_commit_hash=%%I
 
 
-FOR /F %%I IN ('GIT --git-dir=".\.git" rev-list --count HEAD') DO SET _git_commit_num=%%I
+REM FOR /F %%I IN ('GIT --git-dir=".\.git" rev-list --count HEAD') DO SET _git_commit_num=%%I
 
-SET "_xeno_version="
-		IF EXIST VERSION.txt (
-			FOR /F %%I IN (VERSION.txt) DO (
-				SET _xeno_version=%%I
-			)
-		)
+REM SET "_xeno_version="
+		REM IF EXIST VERSION.txt (
+			REM FOR /F %%I IN (VERSION.txt) DO (
+				REM SET _xeno_version=%%I
+			REM )
+		REM )
 
-SET _build_name_rel=Xenotomb-%_xeno_version%-%_git_commit_num%-%_git_commit_hash%.pk3
-SET _build_name_deb=Xenotomb-debug-%_xeno_version%-%_git_commit_num%-%_git_commit_hash%.pk3
+FOR /F %%I IN ('GIT --git-dir=".\.git" describe --long --tags --dirty --always') DO SET _git_version=%%I
+
+SET _build_name_rel=Xenotomb-%_git_version%.pk3
+SET _build_name_deb=Xenotomb-debug-%_git_version%.pk3
 IF EXIST ..\%_build_name_rel% DEL ..\%_build_name_rel%
 IF EXIST ..\%_build_name_deb% DEL ..\%_build_name_deb%
 
@@ -51,6 +53,6 @@ CALL compile.bat /D < nul
 START "Xenotomb Build Process" /B /WAIT "..\7z\7za.exe" a -r -tzip -x@".7zignore" "..\%_build_name_deb%" ".\*"
 
 ECHO(
-ECHO Xenotomb build %_xeno_version%-%_git_commit_num%-%_git_commit_hash% completed.
+ECHO Xenotomb build %_git_version% completed.
 
 PAUSE
