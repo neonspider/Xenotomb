@@ -1,0 +1,38 @@
+#include "zcommon.acs"
+#include "cutscene.acsh"
+
+// builtin function replacements
+function void cs_AmbientSound(str sound, int volume)
+{
+	if(cs_is_playing())
+		AmbientSound(sound, volume);
+}
+
+function void cs_ChangeCamera(int tid, int who, int revert) // same as regular function
+{
+	ChangeCamera(tid, who, revert);
+}
+
+function void cs_FadeTo(int red, int green, int blue, fixed amount, fixed seconds)
+{
+	if(cs_is_playing()) {
+		FadeTo(red, green, blue, amount, seconds);
+	} else {
+		FadeTo(red, green, blue, amount, 0.0);
+	}
+}
+
+function void cs_SetMusic(str song) // no optional args for now, same as regular sunfction
+{
+	SetMusic(song);
+}
+
+function void cs_SetHudSize(int width, int height, bool statusbar) // same as regular function
+{
+	SetHudSize(width, height, statusbar);
+}
+
+function void cs_SetFont(str fontlump) // same as regular function
+{
+	SetFont(fontlump);
+}

@@ -4,12 +4,13 @@
 str gravitytext = "";
 int skiptext = TRUE;
 
-script "Cutscene" ENTER //Map start cutscene
+script "Cutscene" ENTER // Map start cutscene
 {
 	SetMusic("MIDRESET");
 	FadeTo(0, 0, 0, 1.0, 0.0);
 	ClearInventory();
 	
+	cs_set_skip_buttons(BT_ATTACK + BT_USE);
 	cs_begin_cutscene();
 	
 	cs_AmbientSound("Cutscene/A10a_sfx", 127);
@@ -156,11 +157,6 @@ script "Gravity Text" ENTER //Gravity indicator
 		HudMessage(l:gravitytext; HUDMSG_PLAIN, 0, CR_YELLOW, 0, 1, 0.9, 0.1, 1.0);
 		Delay(30);
 	}
-}
-
-script "Location 1" (void)
-{
-	
 }
 
 script "Exit Script" (void) //Exiting script

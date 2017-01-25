@@ -5,12 +5,17 @@
 
 #pragma define raw ON
 
+// delay one tic at a time in case cutscene is skipped in the middle
 #libdefine cs_Delay(tics) \
 	do { \
-		if(cs_is_playing()) \
-			Delay(tics); \
+		int count = (tics); \
+		while(cs_is_playing() && count-- > 0) { \
+			// Log(s:"cs_Delay: count = ", i:count); \
+			Delay(1); \
+		} \
 	} while(0)
-	
+
+// need a macro because HudMessage takes a variable amount of args
 #libdefine cs_HudMessage(...) \
 	do { \
 		if(cs_is_playing()) \
@@ -18,11 +23,11 @@
 	} while(0)
 
 function void cs_AmbientSound(str sound, int volume);
-function void cs_ChangeCamera(int tid, int who, int revert);
+function void cs_ChangeCamera(int tid, int who, int revert); // same as regular function
 function void cs_FadeTo(int red, int green, int blue, fixed amount, fixed seconds);
-function void cs_SetMusic(str song); // no optional args for now
-function void cs_SetHudSize(int width, int height, bool statusbar);
-function void cs_SetFont(str fontlump);
+function void cs_SetMusic(str song); // no optional args for now, same as regular function
+function void cs_SetHudSize(int width, int height, bool statusbar); // same as regular function
+function void cs_SetFont(str fontlump); // same as regular function
 
 function void cs_begin_cutscene(void);
 function void cs_end_cutscene(void);

@@ -6,11 +6,11 @@
 #define FADE_OUT_TIME	35
 
 bool fading = FALSE; */
-bool playing = FALSE;
 
-int skip_buttons = BT_USE & BT_ATTACK;
+bool playing; // 0 by default
+int skip_buttons;
 
-script "Skip Text" /* ENTER */ (void)
+script "skip_text" (void)
 {
 	while(TRUE) {
 		HudMessage(l:"XENOTOMB_SKIP_CUTSCENE"; HUDMSG_PLAIN, 0, CR_WHITE, 0, 0, 0.9, 0.1, 1.0);
@@ -18,22 +18,38 @@ script "Skip Text" /* ENTER */ (void)
 	}
 }
 
+script "begin_cutscene" (void)
+{
+	GiveInventory("CutsceneMode", 1); // hide STBAR
+	ACS_NamedExecute("skip_text", 0);
+	
+	while(TRUE) {
+		if(!cs_is_playing()) {
+			// Log(s:"Scripted ended through cs_end_cutscene().");
+			terminate; // ended naturally so stop the script
+		}
+		
+		if(cs_skipped()) {
+			// Log(s:"Script skipped by player.");
+			cs_end_cutscene();
+			terminate; // skipped so cleanup
+		}
+		
+		Delay(1);
+	}
+}
+
 function void cs_begin_cutscene(void)
 {
 	playing = TRUE;
-	GiveInventory("CutsceneMode", 1); // hide STBAR
-	ACS_NamedExecute("Skip Text", 0);
-	
-	while(cs_is_playing() && !cs_skipped()) {
-		Delay(1);
-	}
-	
-	cs_end_cutscene();
+	// Log(s:"Cutscene started.");
+	ACS_NamedExecute("begin_cutscene", 0);
 }
 
 function void cs_end_cutscene(void)
 {
-	ACS_NamedTerminate("Skip Text", 0);
+	// Log(s:"Cutscene ended.");
+	ACS_NamedTerminate("skip_text", 0);
 	TakeInventory("CutsceneMode", 1); // show STBAR
 	playing = FALSE;
 }
@@ -42,6 +58,8 @@ function bool cs_skipped(void)
 {
 	int input = GetPlayerInput(-1, INPUT_BUTTONS);
 	int oldinput = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+	
+	// Log(s:"input: ", i:input, s:", oldinput: ", i:oldinput, s:", skip_buttons: ", i:skip_buttons);
 	
 	return (input & skip_buttons) && !(oldinput & skip_buttons);
 }
@@ -56,44 +74,7 @@ function bool cs_is_fading(void) // todo
 	return FALSE;
 }
 
-function void cs_set_skip_buttons(int buttons)
+function void cs_set_skip_buttons(int buttons) // buttons that skip the cutscene
 {
 	skip_buttons = buttons;
-}
-
-// builtin function replacements
-
-function void cs_AmbientSound(str sound, int volume)
-{
-	if(cs_is_playing())
-		AmbientSound(sound, volume);
-}
-
-function void cs_ChangeCamera(int tid, int who, int revert) // same as regular function
-{
-	ChangeCamera(tid, who, revert);
-}
-
-function void cs_FadeTo(int red, int green, int blue, fixed amount, fixed seconds)
-{
-	if(cs_is_playing()) {
-		FadeTo(red, green, blue, amount, seconds);
-	} else {
-		FadeTo(red, green, blue, amount, 0.0);
-	}
-}
-
-function void cs_SetMusic(str song) // no optional args for now
-{
-	SetMusic(song);
-}
-
-function void cs_SetHudSize(int width, int height, bool statusbar) // same as regular function
-{
-	SetHudSize(width, height, statusbar);
-}
-
-function void cs_SetFont(str fontlump)
-{
-	SetFont(fontlump);
 }
